@@ -3,18 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        $roles =  Role::latest()->paginate(20);
+        return view('role.index',compact(array_keys(get_defined_vars())));
     }
 
     /**
@@ -22,9 +29,9 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        return view('role.create',compact(array_keys(get_defined_vars())));
     }
 
     /**
@@ -35,7 +42,10 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request["panelLogin"] = $request->panelLogin ? (bool)$request->panelLogin : 0;
+        $request['name'] = Str::slug($request->name);
+        Role::create($request->except('_method'));
+        return redirect(route('role.index',['page'=>\Session::get('page_number')]))->with("success","İşleminiz Başarıyla Tamamlandı");
     }
 
     /**
@@ -55,9 +65,9 @@ class RoleController extends Controller
      * @param  \App\Models\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    public function edit(Role $role, Request $request)
     {
-        //
+        return view('role.edit',compact(array_keys(get_defined_vars())));
     }
 
     /**
@@ -69,7 +79,10 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        $request["panelLogin"] = $request->panelLogin ? (bool)$request->panelLogin : 0;
+        $request['name'] = Str::slug($request->name);
+        $role->update($request->except(['_method']));
+        return redirect(route('role.index',['page'=>\Session::get('page_number')]))->with("success","İşleminiz Başarıyla Tamamlandı");
     }
 
     /**
@@ -80,6 +93,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $role->delete();
+        return back()->with("success","İşleminiz Başarıyla Tamamlandı");
     }
 }

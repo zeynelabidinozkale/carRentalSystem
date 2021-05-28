@@ -15,15 +15,16 @@ use App\Http\Controllers\UserController;
 */
 
 Auth::routes();
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/', function () { return view('welcome'); });
 
-Route::get('/', function () { return view('welcome'); });
-
-Route::middleware(['auth'])->group(function () {
-
+Route::middleware(['auth','panelGuard'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');
     Route::get('personel/sendCredentials/{id}', [PersonelController::class,'sendCredentials'])->name('personel.sendCredentials');
     Route::get('sendCredentials/{id}', [UserController::class,'sendCredentials'])->name('sendCredentials');
     Route::any('profileEdit', [UserController::class,'profileEdit'])->name('profileEdit');
     Route::resource('user', 'App\Http\Controllers\UserController');
-
+    Route::resource('role', 'App\Http\Controllers\RoleController');
 });

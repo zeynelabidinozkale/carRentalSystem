@@ -1,0 +1,187 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
+body {
+    color: #5a5a5a;
+  }
+
+
+  /* CUSTOMIZE THE CAROUSEL
+  -------------------------------------------------- */
+
+  /* Carousel base class */
+  .slider .carousel {
+    margin-bottom: 9rem;
+  }
+  /* Since positioning the image, we need to help out the caption */
+  .slider .carousel-caption {
+    top: 10rem;
+    z-index: 10;
+    right: 20%;
+    left: 20%;
+  }
+  .fa-xl{
+      font-size: 22px;
+      transform: translateY(2px);
+  }
+  /* Declare heights because of positioning of img element */
+  .slider .carousel-item {
+    height: 38rem;
+    background-color: #777;
+  }
+  .slider .carousel-item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 38rem;
+  }
+
+
+  /* MARKETING CONTENT
+  -------------------------------------------------- */
+
+  /* Center align the text within the three columns below the carousel */
+  .marketing .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .marketing h2 {
+    font-weight: 400;
+  }
+  .marketing .col-lg-4 p {
+    margin-right: .75rem;
+    margin-left: .75rem;
+  }
+
+
+  /* Featurettes
+  ------------------------- */
+
+  .featurette-divider {
+    margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+  }
+
+  /* Thin out the marketing headings */
+  .featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.05rem;
+  }
+
+
+  /* RESPONSIVE CSS
+  -------------------------------------------------- */
+
+  @media (min-width: 40em) {
+    /* Bump up size of carousel content */
+    .slider .carousel-caption p {
+      margin-bottom: 1.25rem;
+      font-size: 1.25rem;
+      line-height: 1.4;
+    }
+
+    .slider .featurette-heading {
+      font-size: 50px;
+    }
+  }
+
+  @media (min-width: 62em) {
+    .featurette-heading {
+      margin-top: 7rem;
+    }
+  }
+.pt-60{
+    padding-top:60px;
+}
+.p-normalize{
+    padding-left:-15px !important;
+    padding-right:-15px !important;
+}
+.maker-none li{
+    list-style: none;
+}
+.card.reservation-box {
+    position: absolute;
+    bottom: -80px;
+    margin: 0 auto;
+    left: 20%;
+    right: 20%;
+    z-index: 16;
+}
+.date-picker-wrapper .gap {
+    position: relative;
+    z-index: 1;
+    width: 10px;
+    height: 100%;
+    background-color: red;
+    font-size: 0;
+    line-height: 0;
+    float: left;
+    top: -5px;
+    margin: 0 10px -10px;
+    visibility: hidden;
+    height: 0;
+}
+.date-picker-wrapper{
+    z-index: 17;
+}
+.w-100{
+    width: 100% !important;
+}
+.select2-container--bootstrap{
+    width: 100% !important;
+}
+
+.testimonials .carousel {
+    margin-bottom: 9rem;
+  }
+  /* Since positioning the image, we need to help out the caption */
+  .testimonials .carousel-caption {
+    top: 3rem;
+    z-index: 10;
+    right: 20%;
+    left: 20%;
+  }
+  .fa-xl{
+      font-size: 22px;
+      transform: translateY(2px);
+  }
+  /* Declare heights because of positioning of img element */
+  .testimonials .carousel-item {
+    height: 22rem;
+    background-color: rgba(0, 0, 0, 0);
+}
+.testimonials .carousel-item small,.testimonials .carousel-item h2,.testimonials .carousel-control-next:focus, .testimonials .carousel-control-next:hover,.testimonials .carousel-control-prev:focus,.testimonials .carousel-control-prev:hover{
+    color: #5a5a5a;
+}
+  .testimonials .carousel-item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 46rem;
+  }
+
+.testimonial-box{
+    padding: 20px;
+    border:1px solid #5a5a5a;
+}
+.mt-150{
+    margin-top: 150px;
+}
+.mb-150{
+    margin-bottom: 150px;
+}
+.pb-150{
+    padding-bottom: 150px;
+}
+.testimonials .carousel-control-next, .testimonials .carousel-control-prev {
+    background: #63636342;
+}
+.testimonials .carousel-control-next,
+.testimonials .carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+    color:#5a5a5a00;
+}

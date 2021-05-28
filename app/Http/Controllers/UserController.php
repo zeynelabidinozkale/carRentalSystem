@@ -34,8 +34,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $roles = Role::all();
         return view('user.create',compact(array_keys(get_defined_vars())));
     }
 
@@ -49,10 +50,11 @@ class UserController extends Controller
     {
         $password = rand(100000,999999);
         $request['password'] = Hash::make($password);
-       // Mail::to($request->email)->send(new SendUserRegistered($request->email,$password));
-        User::create($request->all());
+       //Mail::to($request->email)->send(new SendUserRegistered($request->email,$password));
+        $user = User::create($request->all());
+        Mail::to($user->email)->send(new SendUserRegistered($user->email,$password));
 
-        return back()->with("success","Your transaction has been completed successfully.");
+        return redirect(route('user.index'))->with("success","Your transaction has been completed successfully.");
     }
 
     /**
@@ -89,32 +91,6 @@ class UserController extends Controller
         $user->save();
         return back()->with("success","Giriş bilgileri Kullanıcıya mail olarak gönderildi.");
     }
-
-    public function profileEdit(Request $request){
-        $user = Auth::user();
-        if($request->passwordReset){
-            if(Hash::check($request['password'], $user->password)){
-                $user->update(['password'=>Hash::make($request['new_password'])]);
-                return back()->with("success","İşleminiz Başarıyla Tamamlandı.");
-            }else{
-                return back()->with("error","Şifrenizi yanlış girdiniz.");
-            }
-        }
-        elseif ($request->updateUserInformation) {
-            $request->validate(['file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',]);
-                if($request->file('file')) {
-                    if(!strstr($user->imagePath,'no-image')){
-                        Storage::delete($user->imagePath);
-                    }
-                    $request['imagePath'] = $request->file('file')->store('users/'.$user->id.'/profile-image');
-                    $request['photo'] = Storage::url($request['imagePath']);
-                }
-                Auth::user()->update($request->except(['_token','updateUserInformation','file']));
-                return back()->with("success","İşleminiz Başarıyla Tamamlandı.");
-        }
-        return view('user.profile.edit',compact(array_keys(get_defined_vars())));
-    }
-
     /**
      * Update the specified resource in storage.
      *
@@ -124,12 +100,25 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        if($request->passwordChange){
+            if(isset($request->password['currentPassword']) && isset($request->password['newPassword']) && isset($request->password['confirmNewPassword'])){
+                if(!Hash::check($request->password['currentPassword'],$user->password)){
+                    return back()->with("error","You entered your password incorrectly.");
+                }
+                if($request->password['newPassword'] != $request->password['confirmNewPassword']){
+                    return back()->with("error","The passwords you enter are different.");
+                }
+                $user->password = Hash::make($request->password['newPassword']);
+                $user->save();
+                return back()->with("success","Your transaction has been completed successfully.");
+            }
+        }
         if($request->email != $user->email){
             $password = rand(100000,999999);
             $request['password'] = Hash::make($password);
             Mail::to($request->email)->send(new SendUserRegistered($request->email,$password));
         }
-        $user = $user->update($request->except(['_method','redirect']));
+        $user = $user->update($request->except(['_method','redirect','password']));
         switch ($request->redirect) {
             case 'saveAndGoBack':
                 return redirect(route('user.index'))->with("success","Your transaction has been completed successfully.");

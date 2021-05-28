@@ -1,3 +1,6 @@
 .justify-space-between{
     justify-content: space-between;
 }
+.align-self-center{
+    place-self: center;
+}

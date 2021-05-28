@@ -3,17 +3,20 @@
 @section('content')
         <div class="d-flex justify-space-between">
             <h2>Users</h2>
-            <div class="dropdown">
-                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Role @isset($request->role)({{$request->role}})@endisset
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{{ route('user.index') }}">All</a>
-                    @foreach (\App\Models\Role::all() as $role)
-                        <a class="dropdown-item" href="{{ route('user.index',['role'=>$role->name]) }}">{{$role->name}}</a>
-                    @endforeach
+            <span class="d-flex">
+                <a href="{{route('user.create',['role'=>$request->role])}}" class="btn btn-success align-self-center mr-2">+ Create</a>
+                <div class="dropdown align-self-center">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Filter Role @isset($request->role)({{$request->role}})@endisset
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ route('user.index') }}">All</a>
+                        @foreach (\App\Models\Role::all() as $role)
+                            <a class="dropdown-item" href="{{ route('user.index',['role'=>$role->name]) }}">{{$role->name}}</a>
+                        @endforeach
+                    </div>
                 </div>
-              </div>
+            </span>
         </div>
           <div class="table-responsive">
             <table class="table table-striped table-hover table-sm">
@@ -21,6 +24,7 @@
                 <tr>
                   <th>#</th>
                   <th>Name</th>
+                  <th>Role</th>
                   <th>Tel</th>
                   <th>e-mail</th>
                   <th>Registered</th>
@@ -32,6 +36,7 @@
                   <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $user->name }}</td>
+                    <td>{{ $user->role->name }}</td>
                     <td>{{ $user->tel }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->created_at }}</td>
