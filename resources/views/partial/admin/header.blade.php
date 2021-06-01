@@ -34,7 +34,7 @@
                         <button class="dropdown-item hover-pointer" type="button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</button>
                     </div>
                 </div>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                <form autocomplete="off" id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                     @csrf
                 </form>
             </li>

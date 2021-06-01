@@ -69,3 +69,11 @@ body {
 
 .border-top { border-top: 1px solid #e5e5e5; }
 .border-bottom { border-bottom: 1px solid #e5e5e5; }
+button.select2-selection__choice__remove {
+    border: 0px;
+    background: transparent;
+}
+.select2-container--bootstrap .select2-results__option[aria-selected=true] {
+    background-color: #e5e5e7;
+    color: #262626;
+}

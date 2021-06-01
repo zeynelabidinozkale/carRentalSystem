@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Office;
 use Illuminate\Http\Request;
 use App\Mail\SendUserRegistered;
 use Illuminate\Support\Facades\Hash;
@@ -37,6 +38,7 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $roles = Role::all();
+        $offices = Office::all();
         return view('user.create',compact(array_keys(get_defined_vars())));
     }
 
@@ -51,7 +53,8 @@ class UserController extends Controller
         $password = rand(100000,999999);
         $request['password'] = Hash::make($password);
        //Mail::to($request->email)->send(new SendUserRegistered($request->email,$password));
-        $user = User::create($request->all());
+        $user = User::create($request->except(['offices']));
+        $user->offices()->sync($request->offices);
         Mail::to($user->email)->send(new SendUserRegistered($user->email,$password));
 
         return redirect(route('user.index'))->with("success","Your transaction has been completed successfully.");
@@ -77,6 +80,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
+        $offices = Office::all();
         return view('user.edit',compact(array_keys(get_defined_vars())));
     }
 
@@ -118,7 +122,9 @@ class UserController extends Controller
             $request['password'] = Hash::make($password);
             Mail::to($request->email)->send(new SendUserRegistered($request->email,$password));
         }
-        $user = $user->update($request->except(['_method','redirect','password']));
+        $user->update($request->except(['_method','redirect','password','offices']));
+        $user->offices()->sync($request->offices);
+
         switch ($request->redirect) {
             case 'saveAndGoBack':
                 return redirect(route('user.index'))->with("success","Your transaction has been completed successfully.");

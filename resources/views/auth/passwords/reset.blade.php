@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-    <form method="POST" action="{{ route('password.update') }}">
+    <form autocomplete="off" method="POST" action="{{ route('password.update') }}">
         @csrf
 
         <input type="hidden" name="token" value="{{ $token }}">

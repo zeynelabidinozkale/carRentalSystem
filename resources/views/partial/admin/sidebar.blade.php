@@ -28,6 +28,45 @@
                 </a>
             </li>
             @endforeach
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>Vehicle Fleet</span>
+                <a class="d-flex align-items-center text-muted" href="#">
+                  <span data-feather="plus-circle"></span>
+                </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('vehicle.index') }}">
+                        <span data-feather="server"></span>
+                        Vehicles
+                    </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ route('fueltype.index') }}">
+                    <span data-feather="server"></span>
+                    Fuel Types
+                  </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('geartype.index') }}">
+                      <span data-feather="server"></span>
+                      Gear Types
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('vclass.index') }}">
+                        <span data-feather="server"></span>
+                        Vehicle Classes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('office.index') }}">
+                        <span data-feather="server"></span>
+                        Offices
+                    </a>
+                </li>
+              </ul>
             {{-- <li class="nav-item">
               <a class="nav-link" href="{{ route('user.index',['role'=>'client']) }}">
                 <span data-feather="users"></span>

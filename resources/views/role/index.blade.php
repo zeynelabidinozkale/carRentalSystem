@@ -25,7 +25,7 @@
                     <td>{{ $role->updated_at }}</td>
                     <td>
                         <a class="btn btn-primary btn-sm mr-1" href="{{route('role.edit',$role->id)}}">Edit</a>
-                        <form class="delete d-inline" action="{{route('role.destroy',$role->id)}}" method="POST">
+                        <form autocomplete="off" class="delete d-inline" action="{{route('role.destroy',$role->id)}}" method="POST">
                             <input type="hidden" name="_method" value="DELETE"> {{csrf_field()}} <button class="btn btn-danger btn-sm mr-1 confirmation" type="submit">Delete</button>
                         </form>
                     </td>

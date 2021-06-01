@@ -16,8 +16,10 @@ use App\Http\Controllers\UserController;
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home/reservation', [App\Http\Controllers\HomeController::class, 'reservation'])->name('home.reservation');
+
 //Route::get('/', function () { return view('welcome'); });
 
 Route::middleware(['auth','panelGuard'])->group(function () {
@@ -27,4 +29,10 @@ Route::middleware(['auth','panelGuard'])->group(function () {
     Route::any('profileEdit', [UserController::class,'profileEdit'])->name('profileEdit');
     Route::resource('user', 'App\Http\Controllers\UserController');
     Route::resource('role', 'App\Http\Controllers\RoleController');
+
+    Route::resource('fueltype', 'App\Http\Controllers\FueltypeController');
+    Route::resource('geartype', 'App\Http\Controllers\GeartypeController');
+    Route::resource('vclass', 'App\Http\Controllers\VclassController');
+    Route::resource('office', 'App\Http\Controllers\OfficeController');
+    Route::resource('vehicle', 'App\Http\Controllers\VehicleController');
 });

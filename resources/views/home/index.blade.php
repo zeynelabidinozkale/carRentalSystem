@@ -18,7 +18,7 @@
               <div class="carousel-caption text-left">
                 <h1>Example headline.</h1>
                 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                <p><a class="btn btn-lg btn-success" href="#" role="button">View Cars</a></p>
+                <p><a class="btn btn-success" href="#" role="button">View Cars</a></p>
               </div>
             </div>
           </div>
@@ -28,7 +28,7 @@
               <div class="carousel-caption text-right">
                 <h1>Another example headline.</h1>
                 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                <p><a class="btn btn-lg btn-success" href="#" role="button">Learn more</a></p>
+                <p><a class="btn btn-success" href="#" role="button">Learn more</a></p>
               </div>
             </div>
           </div>
@@ -38,7 +38,7 @@
               <div class="carousel-caption text-right">
                 <h1>One more for good measure.</h1>
                 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                <p><a class="btn btn-lg btn-success" href="#" role="button">Browse gallery</a></p>
+                <p><a class="btn btn-success" href="#" role="button">Browse gallery</a></p>
               </div>
             </div>
           </div>
@@ -56,42 +56,43 @@
                 <h5>Reservation Rorm</h5>
             </div>
             <div class="card-body">
-                <div class="row">
+                <form autocomplete="off" class="row" action="{{ route('home.reservation') }}">
+                    <input type="hidden" name="step" value="vehicle">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="pickUpLocation">Select pickup location</label>
-                            <select class="select2 form-control" name="pickUpLocation">
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
+                            <label for="pick_up_office_id">Select pickup location</label>
+                            <select class="select2 form-control" name="pick_up_office_id">
+                                <option value="">---</option>
+                                @foreach ($offices as $office)
+                                <option value="{{ $office->id }}" > {{$office->name}} </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="returnLocation"><input type='checkbox' data-toggle='collapse' data-target='#returnLocation'> Select Return location</label>
-                            <div id="returnLocation" class="collapse w-100">
-                                <select class="select2 form-control" name="returnLocation">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                  </select>
-                            </div>
+                            <label for="drop_off_office_id">
+                                <input type='checkbox' id="collapseReturnLocation" {{--  data-toggle='collapse' data-target='#returnLocation' --}}>
+                                Select Return location</label>
+                                <div id="returnLocation" class="{{-- collapse --}} w-100">
+                                    <select class="select2 form-control" name="drop_off_office_id">
+                                        <option value="">---</option>
+                                        @foreach ($offices as $office)
+                                        <option value="{{ $office->id }}" > {{$office->name}} </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="pickUpLocation">Select pickup and Return Date</label>
-                            <input class="form-control" id="date-range1-1" size="60" value="">
+                            <label for="date-range200">Select pickup and Return Date</label> <br>
+                            <span id="two-inputs"><input class="datetimeInput" name="reservation_pick_up_datetime" id="date-range200" size="20" value=""> to <input class="datetimeInput" name="reservation_drop_off_datetime" id="date-range201" size="20" value=""></span>
                         </div>
                         <div class="form-group">
                             <label for=""></label>
                             <button class="btn btn-success btn-block" >Continue to Reservation <span data-feather="chevron-right"></span> </button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
       </div>
@@ -100,68 +101,123 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center mt-150">
-                    <h4>Choose A Car</h4>
+                    <h3>Showcase</h3>
                 </div>
             </div>
         </div>
         <div class="container">
-            <div id="carouselExampleControls1" class="testimonials carousel slide" data-ride="carousel" data-interval="100000">
+            <div id="carouselExampleControls1" class="cars carousel slide" data-ride="carousel" data-interval="100000">
                 <div class="w-100 carousel-inner " role="listbox">
                     <div class="carousel-item active">
-                        <div class="bg"></div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="carousel-caption">
-                                    <div class="row testimonial-box">
-                                        <div class="col-sm-12">
-                                        <h2>Micheal Smith - <span>Web Developer</span></h2>
-                                        <small>Well incremented. Comes with recommended workout. I'm using it to help with bladder leakage issues that I've been experiencing since a recent vasectomy.</small>
-                                        <small class="smallest mute">- willi</small>
+                                    <div class="card mb-4 box-shadow">
+                                        <img class="card-img-right flex-auto" data-src="/img/car.jpg" src="/img/car.jpg "width="100%" data-holder-rendered="true">
+                                        <div class="card-body">
+                                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                          <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </div>
+                                            <small class="text-muted">9 mins</small>
+                                          </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="carousel-caption">
-                                    <div class="row testimonial-box">
-                                        <div class="col-sm-12">
-                                        <h2>Helena Doe - <span>Architect</span></h2>
-                                        <small>Well incremented. Comes with recommended workout. I'm using it to help with bladder leakage issues that I've been experiencing since a recent vasectomy.</small>
-                                        <small class="smallest mute">- willi</small>
+                                    <div class="card mb-4 box-shadow">
+                                        <img class="card-img-right flex-auto" data-src="/img/car.jpg" src="/img/car.jpg "width="100%" data-holder-rendered="true">
+                                        <div class="card-body">
+                                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                          <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </div>
+                                            <small class="text-muted">9 mins</small>
+                                          </div>
                                         </div>
-                                    </div>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="carousel-caption">
+                                    <div class="card mb-4 box-shadow">
+                                        <img class="card-img-right flex-auto" data-src="/img/car.jpg" src="/img/car.jpg "width="100%" data-holder-rendered="true">
+                                        <div class="card-body">
+                                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                          <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </div>
+                                            <small class="text-muted">9 mins</small>
+                                          </div>
+                                        </div>
+                                      </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <div class="bg"></div>
-                            <div class="row">
-                            <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
                                 <div class="carousel-caption">
-                                    <div class="row testimonial-box">
-                                        <div class="col-sm-12">
-                                        <h2>John Doe - <span>Ceo Mobile company</span></h2>
-                                        <small>Well incremented. Comes with recommended workout. I'm using it to help with bladder leakage issues that I've been experiencing since a recent vasectomy.</small>
-                                        <small class="smallest mute">- willi</small>
+                                    <div class="card mb-4 box-shadow">
+                                        <img class="card-img-right flex-auto" data-src="/img/car.jpg" src="/img/car.jpg "width="100%" data-holder-rendered="true">
+                                        <div class="card-body">
+                                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                          <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </div>
+                                            <small class="text-muted">9 mins</small>
+                                          </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="carousel-caption">
-                                    <div class="row testimonial-box">
-                                        <div class="col-sm-12 ">
-                                        <h2>Helena Doe - <span>Architect</span></h2>
-                                        <small>Well incremented. Comes with recommended workout. I'm using it to help with bladder leakage issues that I've been experiencing since a recent vasectomy.</small>
-                                        <small class="smallest mute">- willi</small>
+                                    <div class="card mb-4 box-shadow">
+                                        <img class="card-img-right flex-auto" data-src="/img/car.jpg" src="/img/car.jpg "width="100%" data-holder-rendered="true">
+                                        <div class="card-body">
+                                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                          <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </div>
+                                            <small class="text-muted">9 mins</small>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="carousel-caption">
+                                    <div class="card mb-4 box-shadow">
+                                        <img class="card-img-right flex-auto" data-src="/img/car.jpg" src="/img/car.jpg "width="100%" data-holder-rendered="true">
+                                        <div class="card-body">
+                                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                          <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                            </div>
+                                            <small class="text-muted">9 mins</small>
+                                          </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls1" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
@@ -176,7 +232,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center mb-5">
-                <a href="#" class="btn btn-primary ">See All <span data-feather="chevron-right"></span></a>
+                <a href="#" class="btn btn-success ">See All <span data-feather="chevron-right"></span></a>
                 </div>
             </div>
         </div>
@@ -184,11 +240,11 @@
 
 
 
-<section class="bg-light pb-150">
+    <section class="bg-light pb-150 pt-5">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-center mt-150">
-                    <h4>Testimonials</h4>
+                <div class="col-md-12 text-center mt-5">
+                    <h3>Testimonials</h3>
                 </div>
             </div>
         </div>
@@ -222,13 +278,13 @@
                             </div>
                             <div class="col-md-4">
                             <div class="carousel-caption">
-                                    <div class="row testimonial-box">
+                                <div class="row testimonial-box">
                                     <div class="col-sm-12">
                                         <h2>Helena Doe - <span>Architect</span></h2>
                                         <small>Well incremented. Comes with recommended workout. I'm using it to help with bladder leakage issues that I've been experiencing since a recent vasectomy.</small>
                                         <small class="smallest mute">- willi</small>
                                     </div>
-                                    </div>
+                                </div>
                             </div>
                         </div>
                         </div>
@@ -289,22 +345,37 @@
 @section('scripts')
 <script>
 $(function () {
+    $("#returnLocation").hide();
+    $('#collapseReturnLocation').click(function(){
+        $("#returnLocation").toggle();
+    });
     $('.select2').select2({
         theme: "bootstrap"
     });
-
-    $('#date-range1-1').dateRangePicker(
+    $('#two-inputs').dateRangePicker(
 	{
-		startOfWeek: 'monday',
-		separator : ' ~ ',
-		format: 'DD.MM.YYYY HH:mm',
-		autoClose: false,
-		time: {
+		separator : ' to ',
+        format: 'DD.MM.YYYY HH:mm',
+        autoClose: true,
+        time: {
 			enabled: true
 		},
-		defaultTime: moment().startOf('day').toDate(),
-		defaultEndTime: moment().endOf('day').toDate()
+        defaultTime: moment().startOf('day').toDate(),
+		defaultEndTime: moment().endOf('day').toDate(),
+		getValue: function()
+		{
+			if ($('#date-range200').val() && $('#date-range201').val() )
+				return $('#date-range200').val() + ' to ' + $('#date-range201').val();
+			else
+				return '';
+		},
+		setValue: function(s,s1,s2)
+		{
+			$('#date-range200').val(s1);
+			$('#date-range201').val(s2);
+		}
 	});
+
 });
 
 </script>

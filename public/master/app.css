@@ -141,8 +141,6 @@ body {
   .testimonials .carousel-caption {
     top: 3rem;
     z-index: 10;
-    right: 20%;
-    left: 20%;
   }
   .fa-xl{
       font-size: 22px;
@@ -166,6 +164,7 @@ body {
 
 .testimonial-box{
     padding: 20px;
+    background-color: #fff;
     border:1px solid #5a5a5a;
 }
 .mt-150{
@@ -184,4 +183,164 @@ body {
 .testimonials .carousel-control-prev /*, .carousel-indicators */ {
     filter: invert(100%);
     color:#5a5a5a00;
+}
+
+
+
+.cars .carousel {
+    margin-bottom: 9rem;
+  }
+  /* Since positioning the image, we need to help out the caption */
+  .cars .carousel-caption {
+    top: 2rem;
+    z-index: 10;
+  }
+  .fa-xl{
+      font-size: 22px;
+      transform: translateY(2px);
+  }
+  /* Declare heights because of positioning of img element */
+  .cars .carousel-item {
+    height: 36rem;
+    background-color: rgba(0, 0, 0, 0);
+}
+.cars .carousel-item small,.cars .carousel-item h2,.cars .carousel-control-next:focus, .cars .carousel-control-next:hover,.cars .carousel-control-prev:focus,.cars .carousel-control-prev:hover{
+    color: #5a5a5a;
+}
+  .cars .carousel-item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 46rem;
+  }
+.cars .carousel-caption{
+    left: 2%;
+    right: 2%;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+.cars .carousel-control-next,
+.cars .carousel-control-prev /*, .carousel-indicators */ {
+    width: 5%;
+}
+.cars .carousel-control-next span, .cars .carousel-control-prev span {
+    width: 30px;
+    height: 30px;
+    padding: 3px;
+    color: #fff;
+    background-image: none;
+    background-color: green;
+    font-weight: bolder;
+}
+.cars .card-text{
+    color: #5a5a5a;
+}
+.mt-150{
+    margin-top: 150px;
+}
+.mb-150{
+    margin-bottom: 150px;
+}
+.pb-150{
+    padding-bottom: 150px;
+}
+.datetimeInput{
+    height: calc(2.25rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    width: 46%;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.datetimeInput:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
+@media screen and (max-width:1120px) {
+    .datetimeInput{
+        width: 100%;
+    }
+}
+.reservation-steps-icon{
+    font-size: 40px;
+    width: 40px;
+}
+
+@media screen and (max-width:767px) {
+    .hidden-xs{
+        display: none;
+    }
+}
+.reservation-steps.active .reservation-steps-line,
+.reservation-steps.active .reservation-steps-line::before,
+.reservation-steps.active .reservation-steps-line::after{
+    background: #28a745;
+}
+.reservation-steps-line {
+    width: 116px;
+    height: 2px;
+    background: #7a7a7a;
+    position: absolute;
+    right: -58px;
+    bottom: 68px;
+}
+.reservation-steps-line::before {
+    width: 6px;
+    height: 6px;
+    background: #7a7a7a;
+    border-radius: 50%;
+    position: absolute;
+    left: 0px;
+    bottom: -2px;
+    content: "";
+}
+.reservation-steps-line::after {
+    width: 6px;
+    height: 6px;
+    background: #7a7a7a;
+    border-radius: 50%;
+    position: absolute;
+    right: 0px;
+    bottom: -2px;
+    content: "";
+}
+.reservation-steps.active .reservation-steps-icon,.reservation-steps.active h3{
+    color: #28a745;
+}
+.bb-1{
+    border-bottom:1px solid rgba(0,0,0,.125);
+}
+.mb-100{
+    margin-bottom: 100px !important;
+}
+
+@media screen and (min-width:767px) {
+    .vehicleFilterCard{
+        position: sticky;
+        top: 88px;
+    }
+}
+
+.bt-0{
+    border-top:0px;
+}
+@media screen and (max-width:1024px) {
+    .display-sm-block{
+        display: block !important;
+    }
+    .h-md-280x280{
+        text-align: center;
+    }
+}
+.mw-50{
+    width: 50% !important;
 }

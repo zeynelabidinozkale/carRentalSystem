@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h4 class="mb-3">{{ $user->name }}</h4>
-                <form class="needs-validation" method="POST" action="{{ route('user.update',$user) }}" novalidate>
+                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('user.update',$user) }}" novalidate>
                   @csrf
                   <input type="hidden" name="_method" value="PATCH">
                   <div class="row">
@@ -23,6 +23,18 @@
                         <input type="email" class="form-control" value="{{ $user->tel }}" name="tel" maxlength="20">
                     </div>
                   </div>
+                  <hr class="mb-4">
+                    <h4 class="mb-3">Offices</h4>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="offices">Offices</label>
+                            <select class="select2 form-control" name="offices[]" multiple>
+                                @foreach ($offices as $office)
+                                    <option value="{{ $office->id }}" @if($user->offices->contains($office)) selected @endif > {{ $office->name }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     @if($user->is(auth()->user()))
                     <hr class="mb-4">
                     <h4 class="mb-3">Password</h4>
@@ -34,7 +46,7 @@
                         </div>
                     </div>
                     @endif
-                    @if($user->hasRole('admin'))
+                    @if(auth()->user()->hasRole('admin'))
                     <hr class="mb-4">
                     <h4 class="mb-3">Role</h4>
                     <div class="d-block my-3">
@@ -58,7 +70,7 @@
             <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="changePasswordLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <form class="needs-validation" method="POST" action="{{ route('user.update',$user) }}" novalidat>
+                        <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('user.update',$user) }}" novalidat>
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
                             <div class="modal-header">
@@ -90,4 +102,14 @@
                 </div>
             </div>
             @endif
+@endsection
+@section('scripts')
+<script>
+$(function () {
+    $('.select2').select2({
+        theme: "bootstrap"
+    });
+});
+
+</script>
 @endsection

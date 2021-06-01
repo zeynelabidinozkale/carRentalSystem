@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-        <form method="POST" action="{{ route('register') }}">
+        <form autocomplete="off" method="POST" action="{{ route('register') }}">
             <div class="form-group mb-0">
                 <div class="col-md-12 text-center">
                      <img class="mb-4" src="/assets/brand/logo.svg" alt="" width="72" height="57">

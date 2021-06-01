@@ -5,7 +5,7 @@
         <hr class="mb-4">
         <div class="row">
             <div class="col-md-8">
-                <form class="needs-validation" method="POST" action="{{ route('user.store') }}" novalidate>
+                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('user.store') }}" novalidate>
                   @csrf
                   <div class="row">
                     <div class="col-md-4 mb-3">
@@ -22,6 +22,18 @@
                     </div>
                   </div>
                     <hr class="mb-4">
+                    <h4 class="mb-3">Office</h4>
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="offices">Offices</label>
+                            <select class="select2 form-control" name="offices[]" multiple>
+                                @foreach ($offices as $office)
+                                    <option value="{{ $office->id }}"> {{ $office->name }} </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
                     <h4 class="mb-3">Role</h4>
                     <div class="d-block my-3">
                         @foreach ($roles as $role)
@@ -36,4 +48,15 @@
                 </form>
             </div>
         </div>
+@endsection
+
+@section('scripts')
+<script>
+$(function () {
+    $('.select2').select2({
+        theme: "bootstrap"
+    });
+});
+
+</script>
 @endsection
