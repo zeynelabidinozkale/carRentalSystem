@@ -14,7 +14,7 @@ class Vehicle extends Model
     protected $guarded = [];
 
     public function offices(){
-        return $this->belongsToMany(Office::class,'office_vehicle')->withPivot('deposit','cost','active');
+        return $this->belongsToMany(Office::class,'office_vehicle')->withPivot('deposit','cost','qty','active');
     }
 
     public function vclass(){

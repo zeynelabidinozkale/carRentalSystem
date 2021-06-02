@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fueltype;
-use App\Models\Geartype;
+use Carbon\Carbon;
 use App\Models\Office;
 use App\Models\Vclass;
 use App\Models\Vehicle;
+use App\Models\Fueltype;
+use App\Models\Geartype;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -35,7 +36,7 @@ class HomeController extends Controller
     public function reservation(Request $request)
     {
         /* return dd(in_array('5',$request->vclass)); */
-        //return dd($request->all());
+        $pick_up_office = Office::find($request->pick_up_office_id);
         $offices = Office::all();
         if(!$request->step){
             return redirect(route('home.reservation',['step'=>'reservation']));
@@ -44,7 +45,7 @@ class HomeController extends Controller
             $vclasses = Vclass::all();
             $geartypes = Geartype::all();
             $fueltypes = Fueltype::all();
-            $vehicles = Vehicle::all();
+            $vehicles = $pick_up_office->activeVehicles;
             if($request->vclass){
                 $vehicles = $vehicles->whereIn('vclass_id',$request->vclass);
             }
@@ -54,6 +55,11 @@ class HomeController extends Controller
             if($request->fueltype){
                 $vehicles = $vehicles->whereIn('fueltype_id',$request->fueltype);
             }
+        }
+        if($request->step == 'checkout'){
+            $pick_up_office = Office::find($request->pick_up_office_id);
+            $drop_off_office = Office::find($request->drop_off_office_id);
+            $vehicle = $pick_up_office->activeVehicles()->find($request->vehicle_id);
         }
         return view('home.reservation',compact(array_keys(get_defined_vars())));
     }

@@ -39,10 +39,10 @@
                   <h4 class="mb-3">Vehicles</h4>
                   <div class="row">
                     @foreach ($vehicles as $vehicle)
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-2 mb-3">
                         @if($vehicle->image) <img src="{{ Storage::url($vehicle->image) }}" height="100"> @else <img src="/img/noImage/noImage.png" height="100" > @endif
                     </div>
-                    <div class="col-md-4 mb-3">
+                    <div class="col-md-3 mb-3">
                       <label for="firstName">Vehicle Name</label>
                       <input type="text" class="form-control" value="{{ $vehicle->name }}" disabled >
                     </div>
@@ -53,6 +53,10 @@
                     <div class="col-md-2 mb-3">
                         <label for="firstName">Rental Cost</label>
                         <input type="number" step="0.01" class="form-control" name="vehicle[{{$vehicle->id}}][cost]" @if($office->vehicles->contains($vehicle)) value="{{ $office->vehicles->find($vehicle)->pivot->cost }}" @else value="{{ $vehicle->cost }}" @endif >
+                    </div>
+                    <div class="col-md-2 mb-3">
+                        <label for="firstName">Qty</label>
+                        <input type="number" class="form-control" name="vehicle[{{$vehicle->id}}][qty]" @if($office->vehicles->contains($vehicle)) value="{{ $office->vehicles->find($vehicle)->pivot->qty }}" @else value="{{ $vehicle->qty }}" @endif >
                     </div>
                     <div class="col-md-1 mb-3 text-center">
                         <label for="firstName">Active</label> <br>

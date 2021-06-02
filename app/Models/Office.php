@@ -16,9 +16,9 @@ class Office extends Model
         return $this->belongsToMany(User::class,'office_personnel');
     }
     public function vehicles(){
-        return $this->belongsToMany(Vehicle::class,'office_vehicle')->withPivot('deposit','cost','active');
+        return $this->belongsToMany(Vehicle::class,'office_vehicle')->withPivot('deposit','cost','qty','active');
     }
     public function activeVehicles(){
-        return $this->vehicles()->wherePivot('active','1');
+        return $this->vehicles()->wherePivot('active','1')->wherePivot('qty','>','0');
     }
 }

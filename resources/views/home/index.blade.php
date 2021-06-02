@@ -360,6 +360,7 @@ $(function () {
         time: {
 			enabled: true
 		},
+        startDate: new Date(),
         defaultTime: moment().startOf('day').toDate(),
 		defaultEndTime: moment().endOf('day').toDate(),
 		getValue: function()

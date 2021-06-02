@@ -344,3 +344,12 @@ body {
 .mw-50{
     width: 50% !important;
 }
+.opacity-05{
+    opacity: 0.5;
+}
+.justify-space-between{
+    justify-content: space-between;
+}
+.hover-pointer:hover{
+    cursor: pointer;
+}

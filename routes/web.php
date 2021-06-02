@@ -22,6 +22,7 @@ Route::get('/home/reservation', [App\Http\Controllers\HomeController::class, 're
 
 //Route::get('/', function () { return view('welcome'); });
 
+
 Route::middleware(['auth','panelGuard'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');
     Route::get('personel/sendCredentials/{id}', [PersonelController::class,'sendCredentials'])->name('personel.sendCredentials');

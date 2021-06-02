@@ -70,4 +70,35 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    /**
+    * Show the application registration form.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function showRegistrationForm()
+    {
+        if (session('link')) {
+            $myPath     = session('link');
+            $registerPath  = url('/register');
+            $previous   = url()->previous();
+
+            if ($previous = $registerPath) {
+                session(['link' => $myPath]);
+            }else{
+                session(['link' => $previous]);
+            }
+        } else{
+            session(['link' => url()->previous()]);
+        }
+        return view('auth.register');
+    }
+
+    protected function redirectTo()
+    {
+        if(session('link')){
+            return session('link');
+        }
+        return 'home';
+    }
 }
