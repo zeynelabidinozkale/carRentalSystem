@@ -13,12 +13,20 @@
                       <input type="text" class="form-control" name="name" required>
                     </div>
                     <div class="col-md-4 mb-3">
+                        <label for="firstName">TC/Passport Number</label>
+                        <input type="number" class="form-control" name="tcPassportNo" maxlength="20" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" name="email" placeholder="you@example.com" required>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="email">Tel</label>
-                        <input type="email" class="form-control" name="tel" maxlength="20">
+                        <label for="tel">Tel</label>
+                        <input type="text" class="form-control" name="tel" maxlength="20">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="address">Address</label>
+                        <textarea class="form-control" name="address" rows="2"></textarea>
                     </div>
                   </div>
                     <hr class="mb-4">

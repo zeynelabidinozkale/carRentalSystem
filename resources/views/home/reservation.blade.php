@@ -86,7 +86,7 @@
                             <form id="vehicleFilterForm" action="">
                                 <input type="hidden" name="step"  value="vehicle">
                                 <input type="hidden" name="pick_up_office_id" value="{{ @$request['pick_up_office_id'] }}">
-                                <input type="hidden" name="drop_off_office_id" value="{{ @$request['drop_off_office_id'] }}">
+                                <input type="hidden" name="drop_off_office_id" value="{{ @$request['drop_off_office_id'] ? $request['drop_off_office_id'] : $request['pick_up_office_id'] }}">
                                 <input type="hidden" name="reservation_pick_up_datetime" value="{{ @$request['reservation_pick_up_datetime'] }}">
                                 <input type="hidden" name="reservation_drop_off_datetime" value="{{ @$request['reservation_drop_off_datetime'] }}">
                                 <div class="row">
@@ -250,7 +250,7 @@
                                             <h5 class="mb-0 mt-4 bb-1 pb-2">Reservation Date Range</h5>
                                         </div>
                                         <div class="col-md-12 pt-2">
-                                                {{ \Carbon\Carbon::parse($request->reservation_pick_up_datetime)->format('d/m/Y') }} <b>to</b> {{ \Carbon\Carbon::parse($request->reservation_drop_off_datetime)->format('d/m/Y') }} <br>
+                                                {{ \Carbon\Carbon::parse($request->reservation_pick_up_datetime)->format('d/m/Y H:i') }} <b>to</b> {{ \Carbon\Carbon::parse($request->reservation_drop_off_datetime)->format('d/m/Y H:i') }} <br>
                                                 <span class="btn btn-warning mt-2"> <b>{{ \Carbon\Carbon::parse($request->reservation_pick_up_datetime)->diff(\Carbon\Carbon::parse($request->reservation_drop_off_datetime))->days }} days</b> </span>
                                         </div>
                                     </div>
@@ -260,35 +260,113 @@
                                         </div>
                                         <div class="col-md-12 pt-2">
                                             <span> <b>Pick Up:</b> {{$pick_up_office->name}}</span> <br>
-                                            <span> <b>Drop Off:</b> {{$drop_off_office->name}}</span>
+                                            <span> <b>Drop Off:</b> @if(isset($request->drop_off_office_id)) {{$drop_off_office->name}} @else {{$pick_up_office->name}} @endif </span>
                                         </div>
                                     </div>
-                                 {{--<div class="row mt-4">
-                                        <div class="col-12 ">
-                                            <button type="submit" class="btn btn-success btn-block"> <b>Filter</b>  <span data-feather="chevron-right"></span> </button>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
-                            {{--
-                            <form id="vehicleFilterForm" action="">
-                                <input type="hidden" name="step"  value="vehicle">
-                                <input type="hidden" name="pick_up_office_id" value="{{ @$request['pick_up_office_id'] }}">
-                                <input type="hidden" name="drop_off_office_id" value="{{ @$request['drop_off_office_id'] }}">
-                                <input type="hidden" name="reservation_pick_up_datetime" value="{{ @$request['pick_up_office_id'] }}">
-                                <input type="hidden" name="reservation_drop_off_datetime" value="{{ @$request['reservation_drop_off_datetime'] }}">
-                            </form> --}}
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <form action="">
-                        <input type="hidden" name="step"  value="checkout">
-                        <input type="hidden" name="pick_up_office_id" value="{{ @$request['pick_up_office_id'] }}">
-                        <input type="hidden" name="drop_off_office_id" value="{{ @$request['drop_off_office_id'] }}">
-                        <input type="hidden" name="reservation_pick_up_datetime" value="{{ @$request['pick_up_office_id'] }}">
-                        <input type="hidden" name="reservation_drop_off_datetime" value="{{ @$request['reservation_drop_off_datetime'] }}">
-
+                    <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('home.reservation.checkout') }}" >
+                        @csrf
+                        <input type="hidden" name="step" value="checkout">
+                        <input type="hidden" name="reservation[vehicle_id]" value="{{ @$request['vehicle_id'] }}">
+                        <input type="hidden" name="reservation[pick_up_office_id]" value="{{ @$request['pick_up_office_id'] }}">
+                        <input type="hidden" name="reservation[drop_off_office_id]" value="{{ @$request['drop_off_office_id'] }}">
+                        <input type="hidden" name="reservation[reservation_pick_up_datetime]" value="{{ @\Carbon\Carbon::parse($request->reservation_pick_up_datetime)->format('Y-m-d H:i:s') }}">
+                        <input type="hidden" name="reservation[reservation_drop_off_datetime]" value="{{ @\Carbon\Carbon::parse($request->reservation_drop_off_datetime)->format('Y-m-d H:i:s') }}">
+                        <input type="hidden" name="reservation[days]" value="{{ \Carbon\Carbon::parse($request->reservation_pick_up_datetime)->diff(\Carbon\Carbon::parse($request->reservation_drop_off_datetime))->days }}">
+                        @if(Auth::check())
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-success">
+                                    You are logged in as <b>{{ auth()->user()->name }}</b>. You can review your reservations from your control panel after you complete your reservation.
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="reservation[client_id]" value="{{ auth()->user()->id }}">
+                        @else
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-info"> <b><a href="{{ route('login') }}" class="text-dark">Login</a></b> or <b><a href="{{ route('register') }}" class="text-dark">register</a></b> if you are not registered to complete the reservation process easily. <br> <small class="text-dark">(You will be redirected to this page when you log in)</small> </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="bb-1">User Information</h4>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Name Surname</label>
+                                <input type="text" class="form-control" name="user[name]" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">TC/Passport Number</label>
+                                <input type="number" class="form-control" name="user[tcPassportNo]" maxlength="20" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" name="user[email]" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="tel">Tel</label>
+                                <input type="text" class="form-control" name="user[tel]" maxlength="20" required>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <input type="checkbox" id="completeSubscription" name="completeSubscription">
+                                <label for="completeSubscription" class="mb-0">Complete my subscription. (We will send your password to your email address.)</label>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="address">Address</label>
+                                <textarea class="form-control" name="user[address]" rows="2" ></textarea>
+                            </div>
+                        </div>
+                        @endif
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="bb-1">Billing Information</h4>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Name</label>
+                                <input type="text" class="form-control" name="billingInformation[name]" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Surname</label>
+                                <input type="text" class="form-control" name="billingInformation[surname]" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">TC/Passport Number</label>
+                                <input type="text" class="form-control" name="billingInformation[tcPassportNo]" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Company Name</label>
+                                <input type="text" class="form-control" name="billingInformation[companyName]" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Tax No</label>
+                                <input type="text" class="form-control" name="billingInformation[taxNo]" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="firstName">Tax Administration</label>
+                                <input type="text" class="form-control" name="billingInformation[TaxAdministration]" required>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label for="address">Address</label>
+                                <textarea class="form-control" name="billingInformation[address]" rows="2" required></textarea>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <input type="checkbox" id="kvkk" name="kvkk" required>
+                                <label class="mb-0">I have read and accept the <b class="hover-pointer" data-toggle="modal" data-target="#kvkkModal">KVKK Clarification Text</b>.</label>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <input type="checkbox" id="rentalAgreement" name="rentalAgreement"  required>
+                                <label class="mb-0">I have read and accept the <b class="hover-pointer" data-toggle="modal" data-target="#rentalAgreementModal">Rental Agreement</b>.</label>
+                            </div>
+                            <div class="col-md-12 mb-3 text-right">
+                                <button class="btn btn-success" type="submit" >Proceed to Checkout</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -299,7 +377,52 @@
 
     </div>
 </section>
+<!-- Button trigger modal -->
 
+  <!-- Modal -->
+  <div class="modal fade" id="rentalAgreementModal" tabindex="-1" role="dialog" aria-labelledby="rentalAgreementModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="rentalAgreementModal">Rental Agreement</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+            The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="kvkkModal" tabindex="-1" role="dialog" aria-labelledby="kvkkModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="kvkkModal">KVKK Clarification Text</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+            The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 @endsection
 @section('scripts')

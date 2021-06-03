@@ -18,9 +18,21 @@
         <li class="nav-item active">
             <a class="nav-link" href="" > <span data-feather="map-pin"></span> Our Offices </a>
         </li>
+        @auth
+        @if(auth()->user()->role->panelLogin)
         <li class="nav-item active">
-            <a class="nav-link" href="{{ route('login') }}" > <span data-feather="user"></span> Account </a>
+            <a class="nav-link" href="{{ route('dashboard') }}" > <span data-feather="user"></span> Dashboard </a>
         </li>
+        @else
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ route('account.index') }}" > <span data-feather="user"></span> My Account </a>
+        </li>
+        @endif
+        @else
+        <li class="nav-item active">
+            <a class="nav-link" href="{{ route('account.index') }}" > <span data-feather="user"></span> My Account </a>
+        </li>
+        @endauth
       </ul>
       <ul class="m-0 list-style-none maker-none" >
         @guest
@@ -42,8 +54,8 @@
                         {{ Auth::user()->name }}
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item hover-pointer" type="button">My account</button>
-                        <button class="dropdown-item hover-pointer" type="button">Reservations</button>
+                        <button class="dropdown-item hover-pointer" type="button" onclick="location.href = '@if(auth()->user()->role->panelLogin) {{ route('user.edit',auth()->user()) }} @else {{ route('account.index') }} @endif'">My account</button>
+                        @if(auth()->user()->role->panelLogin) <button class="dropdown-item hover-pointer" type="button"  onclick="location.href = '{{ route('dashboard') }}'">Dashboard</button> @else <button class="dropdown-item hover-pointer" type="button"  onclick="location.href = '{{ route('account.reservations') }}'">Reservations</button> @endif
                         <button class="dropdown-item hover-pointer" type="button" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</button>
                     </div>
                 </div>

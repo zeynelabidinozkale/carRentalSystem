@@ -23,6 +23,9 @@ class CreateReservationsTable extends Migration
             $table->timestamp('reservation_pick_up_datetime')->nullable();
             $table->timestamp('reservation_drop_off_datetime')->nullable();
             $table->unsignedTinyInteger('days')->nullable();
+            $table->unsignedDecimal('deposit', $precision = 8, $scale = 2)->nullable();
+            $table->unsignedDecimal('cost', $precision = 8, $scale = 2)->nullable();
+            $table->unsignedDecimal('total', $precision = 8, $scale = 2)->nullable();
             $table->timestamp('pick_up_datetime')->nullable();
             $table->timestamp('drop_off_datetime')->nullable();
             $table->string('status')->nullable();

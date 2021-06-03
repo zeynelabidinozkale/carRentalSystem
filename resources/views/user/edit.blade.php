@@ -15,12 +15,20 @@
                       <input type="text" class="form-control" name="name" value="{{ $user->name }}" required>
                     </div>
                     <div class="col-md-4 mb-3">
+                        <label for="firstName">TC/Passport Number</label>
+                        <input type="number" class="form-control" name="tcPassportNo" value="{{ $user->tcPassportNo }}" maxlength="20" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" name="email" value="{{ $user->email }}" placeholder="you@example.com" required>
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="email">Tel</label>
                         <input type="email" class="form-control" value="{{ $user->tel }}" name="tel" maxlength="20">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="address">Address</label>
+                        <textarea class="form-control" name="address" value="{{ $user->address }}" rows="2">{{ $user->address }}</textarea>
                     </div>
                   </div>
                   <hr class="mb-4">

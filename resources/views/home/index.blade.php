@@ -16,9 +16,9 @@
             <img class="first-slide" src="/img/1.jpg" alt="First slide">
             <div class="container">
               <div class="carousel-caption text-left">
-                <h1>Example headline.</h1>
+                <h1>Renting a Car Is Now Easy</h1>
                 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                <p><a class="btn btn-success" href="#" role="button">View Cars</a></p>
+                <p><a class="btn btn-success" href="{{ route('home.reservation') }}" role="button">View Cars</a></p>
               </div>
             </div>
           </div>
@@ -26,9 +26,9 @@
             <img class="second-slide" src="/img/5.jpg" alt="Second slide">
             <div class="container">
               <div class="carousel-caption text-right">
-                <h1>Another example headline.</h1>
+                <h1>Track Your Reservation</h1>
                 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                <p><a class="btn btn-success" href="#" role="button">Learn more</a></p>
+                <p><a class="btn btn-success" href="{{ route('home.reservation.track') }}" role="button">Track Your Reservation</a></p>
               </div>
             </div>
           </div>
@@ -36,9 +36,16 @@
             <img class="third-slide" src="/img/6.jpg" alt="Third slide">
             <div class="container">
               <div class="carousel-caption text-right">
-                <h1>One more for good measure.</h1>
-                <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                <p><a class="btn btn-success" href="#" role="button">Browse gallery</a></p>
+                    @guest
+                    <h1>Sign Up And Make It Easy</h1>
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    <p><a class="btn btn-success" href="{{ route('register') }}" role="button">Sign Up</a></p>
+                    @endguest
+                    @auth
+                    <h1>Go To Your Account</h1>
+                    <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    <p><a class="btn btn-success" href="{{ route('account.index') }}" role="button">My Account</a></p>
+                    @endauth
               </div>
             </div>
           </div>
@@ -240,7 +247,7 @@
 
 
 
-    <section class="bg-light pb-150 pt-5">
+    {{-- <section class="bg-light pb-150 pt-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center mt-5">
@@ -339,7 +346,7 @@
                 </a>
             </div>
         </div>
-    </section>
+    </section> --}}
         <!-- /END THE FEATURETTES -->
 @endsection
 @section('scripts')

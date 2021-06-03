@@ -36,7 +36,7 @@
                   <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $user->name }}</td>
-                    <td>{{ $user->role->name }}</td>
+                    <td>{{ @$user->role->name }}</td>
                     <td>{{ $user->tel }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->created_at }}</td>

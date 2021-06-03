@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Role;
 use App\Models\Office;
+use App\Models\Reservation;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -48,4 +49,8 @@ class User extends Authenticatable
     public function hasRole($role_name){
         return $this->role()->first()->name == $role_name ? true : false;
     }
+    public function reservations(){
+        return $this->hasMany(Reservation::class,'client_id');
+    }
+
 }
