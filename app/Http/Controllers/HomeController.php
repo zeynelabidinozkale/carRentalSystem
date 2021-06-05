@@ -40,9 +40,22 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $offices = Office::all();
+        $vehicles = Vehicle::inRandomOrder()->limit(6)->get();
         return view('home.index',compact(array_keys(get_defined_vars())));
     }
-
+    public function about()
+    {
+        return view('home.about');
+    }
+    public function offices(){
+        $offices = Office::latest()->paginate(20);
+        $locations = Office::all();
+        return view('home.offices',compact(array_keys(get_defined_vars())));
+    }
+    public function vehicles(){
+        $vehicles = Vehicle::latest()->paginate(20);
+        return view('home.vehicles',compact(array_keys(get_defined_vars())));
+    }
     public function reservation(Request $request)
     {
         /* return dd(in_array('5',$request->vclass)); */

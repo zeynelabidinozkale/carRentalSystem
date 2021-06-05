@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h4 class="mb-3">{{ $user->name }}</h4>
-                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('user.update',$user) }}" novalidate>
+                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('user.update',$user) }}"  >
                   @csrf
                   <input type="hidden" name="_method" value="PATCH">
                   <div class="row">
@@ -18,19 +18,21 @@
                         <label for="firstName">TC/Passport Number</label>
                         <input type="number" class="form-control" name="tcPassportNo" value="{{ $user->tcPassportNo }}" maxlength="20" required>
                     </div>
+                    <div class="col-md-4 mb-3"></div>
                     <div class="col-md-4 mb-3">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" name="email" value="{{ $user->email }}" placeholder="you@example.com" required>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="email">Tel</label>
-                        <input type="email" class="form-control" value="{{ $user->tel }}" name="tel" maxlength="20">
+                        <label for="tel">Tel</label>
+                        <input type="tel" class="form-control" value="{{ $user->tel }}" name="tel" maxlength="20">
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="address">Address</label>
                         <textarea class="form-control" name="address" value="{{ $user->address }}" rows="2">{{ $user->address }}</textarea>
                     </div>
                   </div>
+                  @if(auth()->user()->hasRole('admin'))
                   <hr class="mb-4">
                     <h4 class="mb-3">Offices</h4>
                     <div class="row">
@@ -43,6 +45,7 @@
                             </select>
                         </div>
                     </div>
+                    @endif
                     @if($user->is(auth()->user()))
                     <hr class="mb-4">
                     <h4 class="mb-3">Password</h4>
@@ -60,7 +63,7 @@
                     <div class="d-block my-3">
                         @foreach ($roles as $role)
                         <div class="custom-control custom-radio d-inline mr-2">
-                            <input id="{{$role->name}}" name="role_id" type="radio" value="{{ $role->id }}" class="custom-control-input" @if($user->role->name == $role->name) checked @endif required>
+                            <input id="{{$role->name}}" name="role_id" type="radio" value="{{ $role->id }}" class="custom-control-input" @if(@$user->role->name == $role->name) checked @endif required>
                             <label class="custom-control-label" for="{{$role->name}}">{{$role->name}}</label>
                         </div>
                         @endforeach

@@ -42,7 +42,7 @@ class GeartypeController extends Controller
     public function store(Request $request)
     {
         Geartype::create($request->except('_method'));
-        return redirect(route('geartype.index',['page'=>\Session::get('page_number')]))->with("success","İşleminiz Başarıyla Tamamlandı");
+        return redirect(route('geartype.index',['page'=>\Session::get('page_number')]))->with("success","Your transaction has been completed successfully");
     }
 
     /**
@@ -77,7 +77,7 @@ class GeartypeController extends Controller
     public function update(Request $request, Geartype $geartype)
     {
         $geartype->update($request->except(['_method']));
-        return redirect(route('geartype.index',['page'=>\Session::get('page_number')]))->with("success","İşleminiz Başarıyla Tamamlandı");
+        return redirect(route('geartype.index',['page'=>\Session::get('page_number')]))->with("success","Your transaction has been completed successfully");
     }
 
     /**
@@ -89,6 +89,6 @@ class GeartypeController extends Controller
     public function destroy(Geartype $geartype)
     {
         $geartype->delete();
-        return back()->with("success","İşleminiz Başarıyla Tamamlandı");
+        return back()->with("success","Your transaction has been completed successfully");
     }
 }

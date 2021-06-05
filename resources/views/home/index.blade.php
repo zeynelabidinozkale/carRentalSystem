@@ -1,10 +1,16 @@
 @extends('layouts.app')
+@section('styles')
+<style>
+.table-font-color td, .table-font-color th {
+    padding: .75rem;
+    vertical-align: top;
+    color: #2e2e2e;
+    border-top: 1px solid #dee2e6;
+}
+</style>
+
+@endsection
 @section('content')
-   {{--  @if (session('status'))
-        <div class="alert alert-success" role="alert">
-            {{ session('status') }}
-        </div>
-    @endif --}}
     <div id="myCarousel" class="slider carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -18,7 +24,7 @@
               <div class="carousel-caption text-left">
                 <h1>Renting a Car Is Now Easy</h1>
                 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                <p><a class="btn btn-success" href="{{ route('home.reservation') }}" role="button">View Cars</a></p>
+                <p><a class="btn btn-success" href="{{ route('home.reservation') }}" role="button">Start Reservation</a></p>
               </div>
             </div>
           </div>
@@ -68,7 +74,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="pick_up_office_id">Select pickup location</label>
-                            <select class="select2 form-control" name="pick_up_office_id">
+                            <select class="select2 form-control" name="pick_up_office_id" required>
                                 <option value="">---</option>
                                 @foreach ($offices as $office)
                                 <option value="{{ $office->id }}" > {{$office->name}} </option>
@@ -92,11 +98,11 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="date-range200">Select pickup and Return Date</label> <br>
-                            <span id="two-inputs"><input class="datetimeInput" name="reservation_pick_up_datetime" id="date-range200" size="20" value=""> to <input class="datetimeInput" name="reservation_drop_off_datetime" id="date-range201" size="20" value=""></span>
+                            <span id="two-inputs"><input class="datetimeInput" name="reservation_pick_up_datetime" id="date-range200" size="20" value="" required> to <input class="datetimeInput" name="reservation_drop_off_datetime" id="date-range201" size="20" value="" required></span>
                         </div>
                         <div class="form-group">
                             <label for=""></label>
-                            <button class="btn btn-success btn-block" >Continue to Reservation <span data-feather="chevron-right"></span> </button>
+                            <button class="btn btn-success btn-block" type="submit" >Continue to Reservation <span data-feather="chevron-right"></span> </button>
                         </div>
                     </div>
                 </form>
@@ -115,116 +121,53 @@
         <div class="container">
             <div id="carouselExampleControls1" class="cars carousel slide" data-ride="carousel" data-interval="100000">
                 <div class="w-100 carousel-inner " role="listbox">
-                    <div class="carousel-item active">
+
+                    @foreach($vehicles->chunk(3) as $_vehicles)
+                    <div class="carousel-item @if($loop->index == 0) active @endif">
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="carousel-caption">
-                                    <div class="card mb-4 box-shadow">
-                                        <img class="card-img-right flex-auto" data-src="/img/car.jpg" src="/img/car.jpg "width="100%" data-holder-rendered="true">
-                                        <div class="card-body">
-                                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                          <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                            </div>
-                                            <small class="text-muted">9 mins</small>
-                                          </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="carousel-caption">
-                                    <div class="card mb-4 box-shadow">
-                                        <img class="card-img-right flex-auto" data-src="/img/car.jpg" src="/img/car.jpg "width="100%" data-holder-rendered="true">
-                                        <div class="card-body">
-                                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                          <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                            </div>
-                                            <small class="text-muted">9 mins</small>
-                                          </div>
-                                        </div>
-                                      </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="carousel-caption">
-                                    <div class="card mb-4 box-shadow">
-                                        <img class="card-img-right flex-auto" data-src="/img/car.jpg" src="/img/car.jpg "width="100%" data-holder-rendered="true">
-                                        <div class="card-body">
-                                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                          <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                            </div>
-                                            <small class="text-muted">9 mins</small>
-                                          </div>
-                                        </div>
-                                      </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="carousel-caption">
-                                    <div class="card mb-4 box-shadow">
-                                        <img class="card-img-right flex-auto" data-src="/img/car.jpg" src="/img/car.jpg "width="100%" data-holder-rendered="true">
-                                        <div class="card-body">
-                                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                          <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                            </div>
-                                            <small class="text-muted">9 mins</small>
-                                          </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="carousel-caption">
-                                    <div class="card mb-4 box-shadow">
-                                        <img class="card-img-right flex-auto" data-src="/img/car.jpg" src="/img/car.jpg "width="100%" data-holder-rendered="true">
-                                        <div class="card-body">
-                                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                          <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                            </div>
-                                            <small class="text-muted">9 mins</small>
-                                          </div>
-                                        </div>
-                                      </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="carousel-caption">
-                                    <div class="card mb-4 box-shadow">
-                                        <img class="card-img-right flex-auto" data-src="/img/car.jpg" src="/img/car.jpg "width="100%" data-holder-rendered="true">
-                                        <div class="card-body">
-                                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                          <div class="d-flex justify-content-between align-items-center">
-                                            <div class="btn-group">
-                                              <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                              <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                            </div>
-                                            <small class="text-muted">9 mins</small>
-                                          </div>
-                                        </div>
+                        @foreach($_vehicles as $vehicle)
+                        <div class="col-md-4">
+                            <div class="carousel-caption">
+                                <div class="card mb-4 box-shadow">
+                                    <img class="card-img-right flex-auto" src="@if($vehicle->image) {{ Storage::url($vehicle->image) }} @else /img/noImage/noImage.png @endif" width="100%" data-holder-rendered="true">
+                                    <div class="card-body">
+                                        <table class="table table-font-color mt-2 mb-0">
+                                            <thead>
+                                                <tr class="bt-0 text-center">
+                                                    <th class=" border">
+                                                        <span data-feather="users"></span>
+                                                    </th>
+                                                    <th class=" border">
+                                                        <span data-feather="square"></span>
+                                                    </th>
+                                                    <th class=" border">
+                                                        <span data-feather="briefcase"></span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody >
+                                                <tr class="bt-0 text-center">
+                                                    <td class=" border">
+                                                        {{ $vehicle->seats }} seats
+                                                    </td>
+                                                    <td class=" border">
+                                                        {{ $vehicle->doors }} doors
+                                                    </td>
+                                                    <td class=" border">
+                                                        {{ $vehicle->bags }} bags
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @endforeach
+                        </div>
                     </div>
+                    @endforeach
+
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls1" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
@@ -239,115 +182,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center mb-5">
-                <a href="#" class="btn btn-success ">See All <span data-feather="chevron-right"></span></a>
+                <a href="{{ route('vehicles') }}" class="btn btn-success ">See All <span data-feather="chevron-right"></span></a>
                 </div>
             </div>
         </div>
     </section>
 
-
-
-    {{-- <section class="bg-light pb-150 pt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center mt-5">
-                    <h3>Testimonials</h3>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div id="carouselExampleControls" class="testimonials carousel slide " data-ride="carousel" data-interval="100000">
-                <div class="w-100 carousel-inner" role="listbox">
-                    <div class="carousel-item active">
-                        <div class="bg"></div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="carousel-caption">
-                                    <div class="row testimonial-box">
-                                        <div class="col-sm-12">
-                                        <h2>Micheal Smith - <span>Web Developer</span></h2>
-                                        <small>Well incremented. Comes with recommended workout. I'm using it to help with bladder leakage issues that I've been experiencing since a recent vasectomy.</small>
-                                        <small class="smallest mute">- willi</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="carousel-caption">
-                                    <div class="row testimonial-box">
-                                        <div class="col-sm-12">
-                                        <h2>Helena Doe - <span>Architect</span></h2>
-                                        <small>Well incremented. Comes with recommended workout. I'm using it to help with bladder leakage issues that I've been experiencing since a recent vasectomy.</small>
-                                        <small class="smallest mute">- willi</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                            <div class="carousel-caption">
-                                <div class="row testimonial-box">
-                                    <div class="col-sm-12">
-                                        <h2>Helena Doe - <span>Architect</span></h2>
-                                        <small>Well incremented. Comes with recommended workout. I'm using it to help with bladder leakage issues that I've been experiencing since a recent vasectomy.</small>
-                                        <small class="smallest mute">- willi</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="bg"></div>
-                            <div class="row">
-                            <div class="col-md-4">
-                                <div class="carousel-caption">
-                                    <div class="row testimonial-box">
-                                        <div class="col-sm-12">
-                                        <h2>John Doe - <span>Ceo Mobile company</span></h2>
-                                        <small>Well incremented. Comes with recommended workout. I'm using it to help with bladder leakage issues that I've been experiencing since a recent vasectomy.</small>
-                                        <small class="smallest mute">- willi</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="carousel-caption">
-                                    <div class="row testimonial-box">
-                                        <div class="col-sm-12 ">
-                                        <h2>Helena Doe - <span>Architect</span></h2>
-                                        <small>Well incremented. Comes with recommended workout. I'm using it to help with bladder leakage issues that I've been experiencing since a recent vasectomy.</small>
-                                        <small class="smallest mute">- willi</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                            <div class="carousel-caption">
-                                    <div class="row testimonial-box">
-                                    <div class="col-sm-12 ">
-                                    <h2>Helena Doe - <span>Architect</span></h2>
-                                        <small>Well incremented. Comes with recommended workout. I'm using it to help with bladder leakage issues that I've been experiencing since a recent vasectomy.</small>
-                                        <small class="smallest mute">- willi</small>
-                                    </div>
-                                    </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"><i class="fas fa-chevron-left"></i></span>
-                <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"><i class="fas fa-chevron-right"></i></span>
-                <span class="sr-only">Next</span>
-                </a>
-            </div>
-        </div>
-    </section> --}}
-        <!-- /END THE FEATURETTES -->
 @endsection
 @section('scripts')
 <script>

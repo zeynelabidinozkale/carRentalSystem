@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Role;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -45,7 +46,7 @@ class RoleController extends Controller
         $request["panelLogin"] = $request->panelLogin ? (bool)$request->panelLogin : 0;
         $request['name'] = Str::slug($request->name);
         Role::create($request->except('_method'));
-        return redirect(route('role.index',['page'=>\Session::get('page_number')]))->with("success","İşleminiz Başarıyla Tamamlandı");
+        return redirect(route('role.index',['page'=>\Session::get('page_number')]))->with("success","Your transaction has been completed successfully");
     }
 
     /**
@@ -82,7 +83,7 @@ class RoleController extends Controller
         $request["panelLogin"] = $request->panelLogin ? (bool)$request->panelLogin : 0;
         $request['name'] = Str::slug($request->name);
         $role->update($request->except(['_method']));
-        return redirect(route('role.index',['page'=>\Session::get('page_number')]))->with("success","İşleminiz Başarıyla Tamamlandı");
+        return redirect(route('role.index',['page'=>\Session::get('page_number')]))->with("success","Your transaction has been completed successfully");
     }
 
     /**
@@ -93,7 +94,11 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        $role->delete();
-        return back()->with("success","İşleminiz Başarıyla Tamamlandı");
+        try {
+            $role->delete();
+            return back()->with("success","Your transaction has been completed successfully");
+        } catch (Exception $e) {
+            return back()->with("error","Something went wrong while processing your transaction. This may be because you tried to delete a record that cannot be deleted.");
+        }
     }
 }

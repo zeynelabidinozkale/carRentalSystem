@@ -99,6 +99,9 @@ body {
     padding-left:-15px !important;
     padding-right:-15px !important;
 }
+.b-1{
+    border:1px solid rgb(226, 226, 226);
+}
 .maker-none li{
     list-style: none;
 }
@@ -352,4 +355,37 @@ body {
 }
 .hover-pointer:hover{
     cursor: pointer;
+}
+@media screen and (max-width:1024px) {
+    .d-block-sm{
+        display: block;
+    }
+
+    .card.shadow-lg.reservation-box {
+        position: unset;
+    }
+    .carousel-control-next,.carousel-control-prev {
+        color: #fff;
+        text-decoration: none;
+        outline: 0;
+        opacity: .9;
+        height: 100vh;
+    }
+    .date-picker-wrapper .month-wrapper table {
+        width: 190px;
+        float: unset;
+    }
+    .date-picker-wrapper .gap{
+        width: 0px;
+        margin:0px;
+    }
+    .date-picker-wrapper .time1,.date-picker-wrapper .time2{
+        float: left;
+        width: 100%;
+        display: block;
+        text-align: left;
+    }
+    .date-picker-wrapper .hour{
+        text-align: left;
+    }
 }

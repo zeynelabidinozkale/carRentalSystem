@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-9">
                 <h4 class="mb-3">{{ $user->name }}</h4>
-                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('account.update') }}" novalidate>
+                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('account.update') }}"  >
                   @csrf
                   <div class="row">
                     <div class="col-md-4 mb-3">
@@ -26,8 +26,8 @@
                         <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <label for="email">Tel</label>
-                        <input type="email" class="form-control" value="{{ $user->tel }}" name="tel" maxlength="20">
+                        <label for="tel">Tel</label>
+                        <input type="tel" class="form-control" value="{{ $user->tel }}" name="tel" maxlength="20">
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="address">Address</label>
@@ -55,9 +55,8 @@
 <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="changePasswordLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('user.update',$user) }}" novalidat>
+            <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('account.passwordChange') }}" novalidat>
                 @csrf
-                <input type="hidden" name="_method" value="PATCH">
                 <div class="modal-header">
                 <h5 class="modal-title" id="changePasswordLabel">Change Password</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

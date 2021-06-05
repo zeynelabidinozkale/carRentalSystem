@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h4 class="mb-3">{{ $vehicle->name }}</h4>
-                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('vehicle.update',$vehicle) }}"  enctype="multipart/form-data" novalidate>
+                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('vehicle.update',$vehicle) }}"  enctype="multipart/form-data"  >
                   @csrf
                   <input type="hidden" name="_method" value="PATCH">
                   <div class="row">
@@ -25,7 +25,7 @@
                         @if($vehicle->image)
                             <input type="hidden" name="imageUrl" value="{{ $vehicle->image }}">
                         @endif
-                        <input type="file" class="form-control" name="image" required>
+                        <input type="file" class="form-control" name="image" >
                     </div>
                     <div class="col-md-4 mb-3">
                         <label for="firstName">Seats</label>

@@ -1,7 +1,7 @@
 
 
 
- @extends('layouts.app')
+@extends('layouts.app')
 @section('content')
 <section class="mt-5 hidden-xs">
     <div class="container">
@@ -36,12 +36,12 @@
                     <h5>Reservation Rorm</h5>
                 </div>
                 <div class="card-body">
-                    <form autocomplete="off" class="row" action="{{ route('home.reservation') }}">
+                    <form autocomplete="off" class="row" action="{{ route('home.reservation') }}" >
                         <input type="hidden" name="step" value="vehicle">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="pick_up_office_id">Select pickup location</label>
-                                <select class="select2 form-control" name="pick_up_office_id">
+                                <select class="select2 form-control" name="pick_up_office_id" required>
                                     <option value="">---</option>
                                     @foreach ($offices as $office)
                                     <option value="{{ $office->id }}" > {{$office->name}} </option>
@@ -63,7 +63,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="date-range200">Select pickup and Return Date</label> <br>
-                                <span id="two-inputs"><input class="datetimeInput" name="reservation_pick_up_datetime" id="date-range200" size="20" value=""> to <input class="datetimeInput" name="reservation_drop_off_datetime" id="date-range201" size="20" value=""></span>
+                                <span id="two-inputs"><input class="datetimeInput" name="reservation_pick_up_datetime" id="date-range200" size="20" value="" required> to <input class="datetimeInput" name="reservation_drop_off_datetime" id="date-range201" size="20" value="" required></span>
                             </div>
                             <div class="form-group">
                                 <label for=""></label>
@@ -136,6 +136,8 @@
                         <input type="hidden" name="drop_off_office_id" value="{{ @$request['drop_off_office_id'] }}">
                         <input type="hidden" name="reservation_pick_up_datetime" value="{{ @$request['reservation_pick_up_datetime'] }}">
                         <input type="hidden" name="reservation_drop_off_datetime" value="{{ @$request['reservation_drop_off_datetime'] }}">
+                        @if($vehicles->count()>0)
+                        <div class="alert bg-light b-1"> <b>{{$vehicles->count()}}</b> vehicles found. </div>
                         @foreach ($vehicles as $vehicle)
                         <div class="card flex-md-row mb-4 box-shadow h-md-280x280 display-sm-block">
                             <img class="card-img-right flex-auto" src="@if($vehicle->image) {{ Storage::url($vehicle->image) }} @else /img/noImage/noImage.png @endif" style="width:280px;height:280px;" >
@@ -187,6 +189,9 @@
                             </div>
                         </div>
                         @endforeach
+                        @else
+                            <div class="alert alert-warning">No suitable vehicle found. Edit your filtering or go back to the <a href="{{ route('home.reservation',['step'=>'reservation']) }}"> <b class="text-dark">reservation page</b> </a> </div>
+                        @endif
                     </form>
                 </div>
             </div>
@@ -298,11 +303,11 @@
                                 <h4 class="bb-1">User Information</h4>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">Name Surname</label>
+                                <label for="">Name Surname</label>
                                 <input type="text" class="form-control" name="user[name]" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">TC/Passport Number</label>
+                                <label for="">TC/Passport Number</label>
                                 <input type="number" class="form-control" name="user[tcPassportNo]" maxlength="20" required>
                             </div>
                             <div class="col-md-6 mb-3">
@@ -311,7 +316,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="tel">Tel</label>
-                                <input type="text" class="form-control" name="user[tel]" maxlength="20" required>
+                                <input type="tel" class="form-control" name="user[tel]" maxlength="20" required>
                             </div>
                             <div class="col-md-12 mb-3">
                                 <input type="checkbox" id="completeSubscription" name="completeSubscription">
@@ -328,31 +333,31 @@
                                 <h4 class="bb-1">Billing Information</h4>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">Name</label>
+                                <label for="">Name</label>
                                 <input type="text" class="form-control" name="billingInformation[name]" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">Surname</label>
+                                <label for="">Surname</label>
                                 <input type="text" class="form-control" name="billingInformation[surname]" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">TC/Passport Number</label>
+                                <label for="">TC/Passport Number</label>
                                 <input type="text" class="form-control" name="billingInformation[tcPassportNo]" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">Company Name</label>
+                                <label for="">Company Name</label>
                                 <input type="text" class="form-control" name="billingInformation[companyName]" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">Tax No</label>
+                                <label for="">Tax No</label>
                                 <input type="text" class="form-control" name="billingInformation[taxNo]" required>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="firstName">Tax Administration</label>
+                                <label for="">Tax Administration</label>
                                 <input type="text" class="form-control" name="billingInformation[TaxAdministration]" required>
                             </div>
                             <div class="col-md-12 mb-3">
-                                <label for="address">Address</label>
+                                <label for="">Address</label>
                                 <textarea class="form-control" name="billingInformation[address]" rows="2" required></textarea>
                             </div>
                             <div class="col-md-12 mb-3">

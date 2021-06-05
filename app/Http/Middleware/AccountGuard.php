@@ -22,6 +22,6 @@ class AccountGuard
                 return $next($request);
             }
         }
-        return redirect(route('home'))->with('error','Bu sayfaya giriş izniniz bulunmamaktadır.');
+        return redirect(route('home'))->with('error','You do not have permission to access this page.');
     }
 }

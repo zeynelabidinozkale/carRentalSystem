@@ -56,7 +56,7 @@ class VehicleController extends Controller
             $vehicle->image = $request->image;
             $vehicle->save();
         }
-        return redirect(route('vehicle.index',['page'=>\Session::get('page_number')]))->with("success","İşleminiz Başarıyla Tamamlandı");
+        return redirect(route('vehicle.index',['page'=>\Session::get('page_number')]))->with("success","Your transaction has been completed successfully");
     }
 
     /**
@@ -105,7 +105,7 @@ class VehicleController extends Controller
             $vehicle->image = $request->imageUrl;
         }
         $vehicle->save();
-        return redirect(route('vehicle.index',['page'=>\Session::get('page_number')]))->with("success","İşleminiz Başarıyla Tamamlandı");
+        return redirect(route('vehicle.index',['page'=>\Session::get('page_number')]))->with("success","Your transaction has been completed successfully");
     }
 
     /**
@@ -116,8 +116,12 @@ class VehicleController extends Controller
      */
     public function destroy(Vehicle $vehicle)
     {
-        unlink('.'.Storage::url($vehicle->image));
-        $vehicle->delete();
-        return back()->with("success","İşleminiz Başarıyla Tamamlandı");
+        try {
+            unlink('.'.Storage::url($vehicle->image));
+            $vehicle->delete();
+            return back()->with("success","Your transaction has been completed successfully");
+        } catch (Exception $e) {
+            return back()->with("error","Something went wrong while processing your transaction. This may be because you tried to delete a record that cannot be deleted.");
+        }
     }
 }

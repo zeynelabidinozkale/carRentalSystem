@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CheckoutController;
 
@@ -20,6 +21,9 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
+Route::get('/home/offices', [App\Http\Controllers\HomeController::class, 'offices'])->name('offices');
+Route::get('/home/vehicles', [App\Http\Controllers\HomeController::class, 'vehicles'])->name('vehicles');
 Route::get('/home/reservation', [App\Http\Controllers\HomeController::class, 'reservation'])->name('home.reservation');
 Route::post('/home/reservation/checkout', [App\Http\Controllers\HomeController::class, 'checkout'])->name('home.reservation.checkout');
 Route::get('/home/reservation/checkout_', [App\Http\Controllers\HomeController::class, 'getCheckoutForm'])->name('home.reservation.checkout_');
@@ -33,6 +37,7 @@ Route::middleware(['auth','accountGuard'])->group(function () {
     Route::any('/account/reservations', [AccountController::class,'reservations'])->name('account.reservations');
     Route::any('/account/reservationDetails', [AccountController::class,'reservationDetails'])->name('account.reservationDetails');
     Route::any('/account/update', [AccountController::class,'update'])->name('account.update');
+    Route::any('/account/passwordChange', [AccountController::class,'passwordChange'])->name('account.passwordChange');
 });
 
 
@@ -41,6 +46,7 @@ Route::middleware(['auth','accountGuard'])->group(function () {
 
 Route::middleware(['auth','panelGuard'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');
+    Route::any('/dashboard/logs', [AdminController::class,'logs'])->name('logs');
     Route::get('sendCredentials/{id}', [UserController::class,'sendCredentials'])->name('sendCredentials');
     Route::any('profileEdit', [UserController::class,'profileEdit'])->name('profileEdit');
     Route::resource('user', 'App\Http\Controllers\UserController');
@@ -50,4 +56,5 @@ Route::middleware(['auth','panelGuard'])->group(function () {
     Route::resource('vclass', 'App\Http\Controllers\VclassController');
     Route::resource('office', 'App\Http\Controllers\OfficeController');
     Route::resource('vehicle', 'App\Http\Controllers\VehicleController');
+    Route::resource('reservation', 'App\Http\Controllers\ReservationController');
 });

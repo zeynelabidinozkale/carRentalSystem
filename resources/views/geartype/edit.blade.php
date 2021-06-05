@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h4 class="mb-3">{{ $geartype->name }}</h4>
-                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('geartype.update',$geartype) }}" novalidate>
+                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('geartype.update',$geartype) }}"  >
                   @csrf
                   <input type="hidden" name="_method" value="PATCH">
                   <div class="row">

@@ -77,3 +77,28 @@ button.select2-selection__choice__remove {
     background-color: #e5e5e7;
     color: #262626;
 }
+@media screen and (max-width: 1024px){
+    .sidebar .sidebar-sticky a.nav-link {
+        padding: 2px !important;
+    }
+    nav.sidebar {
+        padding: 4px;
+    }
+}
+@media screen and (max-width: 768px){
+    .menu-sm{
+        display: block;
+        margin-left: 0px !important;
+    }
+    .menu-md{
+        display: none;
+    }
+}
+@media screen and (min-width: 768px){
+    .menu-sm{
+        display: none;
+    }
+    .menu-md{
+        display: block;
+    }
+}

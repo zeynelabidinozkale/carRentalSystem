@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-10">
                 <h4 class="mb-3">{{ $office->name }}</h4>
-                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('office.update',$office) }}" novalidate>
+                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('office.update',$office) }}"  >
                   @csrf
                   <input type="hidden" name="_method" value="PATCH">
                   <div class="row">

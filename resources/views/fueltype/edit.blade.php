@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-md-8">
                 <h4 class="mb-3">{{ $fueltype->name }}</h4>
-                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('fueltype.update',$fueltype) }}" novalidate>
+                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('fueltype.update',$fueltype) }}"  >
                   @csrf
                   <input type="hidden" name="_method" value="PATCH">
                   <div class="row">

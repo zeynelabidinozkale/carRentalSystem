@@ -5,7 +5,7 @@
         <hr class="mb-4">
         <div class="row">
             <div class="col-md-8">
-                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('vclass.store') }}" novalidate>
+                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('vclass.store') }}"  >
                   @csrf
                   <div class="row">
                     <div class="col-md-6 mb-3">

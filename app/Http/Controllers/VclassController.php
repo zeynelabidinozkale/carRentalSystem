@@ -42,7 +42,7 @@ class VclassController extends Controller
     public function store(Request $request)
     {
         Vclass::create($request->except('_method'));
-        return redirect(route('vclass.index',['page'=>\Session::get('page_number')]))->with("success","İşleminiz Başarıyla Tamamlandı");
+        return redirect(route('vclass.index',['page'=>\Session::get('page_number')]))->with("success","Your transaction has been completed successfully");
     }
 
     /**
@@ -77,7 +77,7 @@ class VclassController extends Controller
     public function update(Request $request, Vclass $vclass)
     {
         $vclass->update($request->except(['_method']));
-        return redirect(route('vclass.index',['page'=>\Session::get('page_number')]))->with("success","İşleminiz Başarıyla Tamamlandı");
+        return redirect(route('vclass.index',['page'=>\Session::get('page_number')]))->with("success","Your transaction has been completed successfully");
     }
 
     /**
@@ -89,6 +89,6 @@ class VclassController extends Controller
     public function destroy(Vclass $vclass)
     {
         $vclass->delete();
-        return back()->with("success","İşleminiz Başarıyla Tamamlandı");
+        return back()->with("success","Your transaction has been completed successfully");
     }
 }

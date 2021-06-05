@@ -22,6 +22,36 @@
                 @enderror
             </div>
 
+            <div class="form-group text-left">
+                <label for="tel" >{{ __('tel') }}</label>
+                <input id="tel" type="text" class="form-control @error('tel') is-invalid @enderror" name="tel" value="{{ old('tel') }}" required autocomplete="tel"  >
+                @error('tel')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group text-left">
+                <label for="tcPassportNo" >{{ __('TC/Passport Number') }}</label>
+                <input id="tcPassportNo" type="text" class="form-control @error('tcPassportNo') is-invalid @enderror" name="tcPassportNo" value="{{ old('tcPassportNo') }}" required autocomplete="tcPassportNo"  >
+                @error('tcPassportNo')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="form-group text-left">
+                <label for="address" >{{ __('address') }}</label>
+                <textarea name="address" class="form-control @error('address') is-invalid @enderror" id="address" value="{{ old('address') }}" rows="2"  autocomplete="address"> {{ old('address') }} </textarea>
+                @error('address')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
             <div class="form-group ">
                 <label for="email" >{{ __('E-Mail Address') }}</label>
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">

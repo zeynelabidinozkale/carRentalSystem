@@ -8,6 +8,7 @@
                 Dashboard
               </a>
             </li>
+            @if(auth()->user()->hasRole('admin'))
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                 <span>User Management</span>
                 <a class="d-flex align-items-center text-muted" href="#">
@@ -35,6 +36,7 @@
                   <span data-feather="plus-circle"></span>
                 </a>
             </h6>
+
             <ul class="nav flex-column mb-2">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('vehicle.index') }}">
@@ -67,6 +69,28 @@
                     </a>
                 </li>
               </ul>
+              @else
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>Reservations</span>
+                <a class="d-flex align-items-center text-muted" href="#">
+                  <span data-feather="plus-circle"></span>
+                </a>
+            </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('office.index') }}">
+                            <span data-feather="server"></span>
+                            Offices
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('reservation.index') }}">
+                            <span data-feather="server"></span>
+                            Reservations
+                        </a>
+                    </li>
+                </ul>
+              @endif
             {{-- <li class="nav-item">
               <a class="nav-link" href="{{ route('user.index',['role'=>'client']) }}">
                 <span data-feather="users"></span>
@@ -86,7 +110,7 @@
                 </a>
             </li> --}}
           </ul>
-
+          @if(auth()->user()->hasRole('admin'))
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
             <span>System</span>
             <a class="d-flex align-items-center text-muted" href="#">
@@ -95,7 +119,7 @@
           </h6>
           <ul class="nav flex-column mb-2">
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="{{ route('logs') }}">
                 <span data-feather="server"></span>
                 Logs
               </a>
@@ -119,5 +143,27 @@
               </a>
             </li>
           </ul>
+          @else
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Account</span>
+            <a class="d-flex align-items-center text-muted" href="#">
+              <span data-feather="plus-circle"></span>
+            </a>
+          </h6>
+          <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('user.edit',['user'=>auth()->user()]) }}">
+                <span data-feather="settings"></span>
+                Account
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <span data-feather="file-text"></span>
+                Logout
+              </a>
+            </li>
+          </ul>
+          @endif
         </div>
       </nav>

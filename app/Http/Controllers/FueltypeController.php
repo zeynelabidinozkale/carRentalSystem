@@ -42,7 +42,7 @@ class FueltypeController extends Controller
     public function store(Request $request)
     {
         Fueltype::create($request->except('_method'));
-        return redirect(route('fueltype.index',['page'=>\Session::get('page_number')]))->with("success","İşleminiz Başarıyla Tamamlandı");
+        return redirect(route('fueltype.index',['page'=>\Session::get('page_number')]))->with("success","Your transaction has been completed successfully");
     }
 
     /**
@@ -77,7 +77,7 @@ class FueltypeController extends Controller
     public function update(Request $request, Fueltype $fueltype)
     {
         $fueltype->update($request->except(['_method']));
-        return redirect(route('fueltype.index',['page'=>\Session::get('page_number')]))->with("success","İşleminiz Başarıyla Tamamlandı");
+        return redirect(route('fueltype.index',['page'=>\Session::get('page_number')]))->with("success","Your transaction has been completed successfully");
     }
 
     /**
@@ -89,6 +89,6 @@ class FueltypeController extends Controller
     public function destroy(Fueltype $fueltype)
     {
         $fueltype->delete();
-        return back()->with("success","İşleminiz Başarıyla Tamamlandı");
+        return back()->with("success","Your transaction has been completed successfully");
     }
 }

@@ -10,18 +10,18 @@
           <a class="nav-link" href="{{ route('home') }}" > <span data-feather="home"></span> Home </a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="" > <span data-feather="award"></span> About </a>
+            <a class="nav-link" href="{{ route('about') }}" > <span data-feather="award"></span> About </a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="" > <i class="fa fa-car-side fa-xl"></i> Vehicles </a>
+            <a class="nav-link" href="{{ route('vehicles') }}" > <i class="fa fa-car-side fa-xl"></i> Vehicles </a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="" > <span data-feather="map-pin"></span> Our Offices </a>
+            <a class="nav-link" href="{{ route('offices') }}" > <span data-feather="map-pin"></span> Our Offices </a>
         </li>
         @auth
         @if(auth()->user()->role->panelLogin)
         <li class="nav-item active">
-            <a class="nav-link" href="{{ route('dashboard') }}" > <span data-feather="user"></span> Dashboard </a>
+            <a class="nav-link" href="{{ route('dashboard') }}" > <span data-feather="sidebar"></span> Dashboard </a>
         </li>
         @else
         <li class="nav-item active">

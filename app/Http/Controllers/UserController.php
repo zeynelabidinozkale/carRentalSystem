@@ -53,8 +53,15 @@ class UserController extends Controller
         $password = rand(100000,999999);
         $request['password'] = Hash::make($password);
        //Mail::to($request->email)->send(new SendUserRegistered($request->email,$password));
+        if(!auth()->user()->hasRole('admin')){
+         if(Role::find($request->role_id)->name=='admin'){
+            return back()->with("error","You dont have permission.");
+         }
+        }
         $user = User::create($request->except(['offices']));
-        $user->offices()->sync($request->offices);
+        if(auth()->user()->hasRole('admin')){
+            $user->offices()->sync($request->offices);
+        }
         Mail::to($user->email)->send(new SendUserRegistered($user->email,$password));
 
         return redirect(route('user.index'))->with("success","Your transaction has been completed successfully.");
@@ -123,8 +130,10 @@ class UserController extends Controller
             Mail::to($request->email)->send(new SendUserRegistered($request->email,$password));
         }
         $user->update($request->except(['_method','redirect','password','offices']));
-        $user->offices()->sync($request->offices);
 
+        if(auth()->user()->hasRole('admin')){
+            $user->offices()->sync($request->offices);
+        }
         switch ($request->redirect) {
             case 'saveAndGoBack':
                 return redirect(route('user.index'))->with("success","Your transaction has been completed successfully.");
@@ -146,7 +155,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return back()->with("success","Your transaction has been completed successfully.");
+        try {
+            $user->delete();
+            return back()->with("success","Your transaction has been completed successfully.");
+        } catch (Exception $e) {
+            return back()->with("error","Something went wrong while processing your transaction. This may be because you tried to delete a record that cannot be deleted.");
+        }
     }
 }
