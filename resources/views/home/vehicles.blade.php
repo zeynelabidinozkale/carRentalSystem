@@ -28,7 +28,7 @@
                               <td>{{ $loop->iteration }}</td>
                               <td>@if($vehicle->image) <img src="{{ Storage::url($vehicle->image)}}" width="100"> <br> @else <img src="/img/noImage/noImage.png" width="100" > <br> @endif {{ $vehicle->name }}</td>
                               <td>{{ $vehicle->seats }} seats, {{ $vehicle->bags }} bags, {{ $vehicle->doors }} doors   </td>
-                              <td><b>fuel type:</b> {{ $vehicle->fueltype->name }}, <b>gear type:</b> {{ $vehicle->geartype->name }}, <b>Vehicle Class:</b> {{ $vehicle->vclass->name }} </td>
+                              <td><b>fuel type:</b> {{ @$vehicle->fueltype->name }}, <b>gear type:</b> {{ @$vehicle->geartype->name }}, <b>Vehicle Class:</b> {{ @$vehicle->vclass->name }} </td>
                             </tr>
                             @endforeach
                         </tbody>

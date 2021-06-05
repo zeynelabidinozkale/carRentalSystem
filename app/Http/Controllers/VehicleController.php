@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Vclass;
 use App\Models\Vehicle;
 use App\Models\Fueltype;

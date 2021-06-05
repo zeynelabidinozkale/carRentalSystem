@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Office;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;

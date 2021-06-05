@@ -142,7 +142,7 @@
                         <div class="card flex-md-row mb-4 box-shadow h-md-280x280 display-sm-block">
                             <img class="card-img-right flex-auto" src="@if($vehicle->image) {{ Storage::url($vehicle->image) }} @else /img/noImage/noImage.png @endif" style="width:280px;height:280px;" >
                             <div class="card-body d-flex flex-column align-items-start">
-                                <strong class="d-inline-block mb-2 text-primary"> {{ $vehicle->vclass->name }} - {{$vehicle->fueltype->name}} - {{ $vehicle->geartype->name }}</strong>
+                                <strong class="d-inline-block mb-2 text-primary"> {{ @$vehicle->vclass->name }} - {{@$vehicle->fueltype->name}} - {{ @$vehicle->geartype->name }}</strong>
                                 <h3 class="mb-0">
                                 <span class="text-dark" href="#">{{$vehicle->name}}</span>
                                 </h3>
@@ -208,7 +208,7 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <div class="col-12 bb-1">
-                                            <h5>{{ $vehicle->vclass->name }}</h5>
+                                            <h5>{{ @$vehicle->vclass->name }}</h5>
                                         </div>
                                         <div class="form-inline rounded p-sm-2  col-4 mt-1">
                                             <img src="{{ Storage::url($vehicle->image) }}" width="100%" >

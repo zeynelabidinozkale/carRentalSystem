@@ -1,5 +1,5 @@
 
-      <nav class="col-md-2 d-none d-md-block bg-light sidebar mt-4" id="nav">
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar mt-4 p-1" id="nav">
         <div class="sidebar-sticky">
           <ul class="nav flex-column">
             <li class="nav-item">
@@ -9,7 +9,13 @@
               </a>
             </li>
             @if(auth()->user()->hasRole('admin'))
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('reservation.index') }}">
+                    <span data-feather="server"></span>
+                    Reservations
+                </a>
+            </li>
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
                 <span>User Management</span>
                 <a class="d-flex align-items-center text-muted" href="#">
                   <span data-feather="plus-circle"></span>
@@ -30,7 +36,7 @@
             </li>
             @endforeach
 
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
                 <span>Vehicle Fleet</span>
                 <a class="d-flex align-items-center text-muted" href="#">
                   <span data-feather="plus-circle"></span>
@@ -40,7 +46,7 @@
             <ul class="nav flex-column mb-2">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('vehicle.index') }}">
-                        <span data-feather="server"></span>
+                        <span data-feather="clipboard"></span>
                         Vehicles
                     </a>
                 </li>
@@ -64,13 +70,13 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('office.index') }}">
-                        <span data-feather="server"></span>
+                        <span data-feather="map-pin"></span>
                         Offices
                     </a>
                 </li>
               </ul>
               @else
-              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
                 <span>Reservations</span>
                 <a class="d-flex align-items-center text-muted" href="#">
                   <span data-feather="plus-circle"></span>
@@ -111,7 +117,7 @@
             </li> --}}
           </ul>
           @if(auth()->user()->hasRole('admin'))
-          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
             <span>System</span>
             <a class="d-flex align-items-center text-muted" href="#">
               <span data-feather="plus-circle"></span>
@@ -144,7 +150,7 @@
             </li>
           </ul>
           @else
-          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-3 mb-1 text-muted">
             <span>Account</span>
             <a class="d-flex align-items-center text-muted" href="#">
               <span data-feather="plus-circle"></span>

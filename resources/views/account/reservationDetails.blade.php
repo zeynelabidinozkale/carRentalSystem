@@ -58,8 +58,8 @@
                                  @endphp
                                 <tr>
                                    <td class="center">1</td>
-                                   <td class="left strong"> @if($vehicle->image) <img src="{{ Storage::url($vehicle->image) }}" width="100"> <br> @endif {{ $vehicle->name }} ({{ $vehicle->vclass->name }})</td>
-                                   <td class="left"> {{ $vehicle->seats }} seats, {{ $vehicle->bags }} bags, {{ $vehicle->doors }} doors <br> <b>fuel type:</b> {{ $vehicle->fueltype->name }}, <b>gear type:</b> {{ $vehicle->geartype->name }}, <b>Vehicle Class:</b> {{ $vehicle->vclass->name }} <br>
+                                   <td class="left strong"> @if($vehicle->image) <img src="{{ Storage::url($vehicle->image) }}" width="100"> <br> @endif {{ $vehicle->name }} ({{ @$vehicle->vclass->name }})</td>
+                                   <td class="left"> {{ $vehicle->seats }} seats, {{ $vehicle->bags }} bags, {{ $vehicle->doors }} doors <br> <b>fuel type:</b> {{ @$vehicle->fueltype->name }}, <b>gear type:</b> {{ @$vehicle->geartype->name }}, <b>Vehicle Class:</b> {{ @$vehicle->vclass->name }} <br>
                                     <b>Pick Up:</b> {{ \Carbon\Carbon::parse($reservation->reservation_pick_up_datetime)->format('d/m/Y H:i') }} - {{ @$reservation->pickUpOffice->name }} <br>
                                     <b>Drop Off:</b> {{ \Carbon\Carbon::parse($reservation->reservation_drop_off_datetime)->format('d/m/Y H:i') }} - {{ @$reservation->dropOffOffice ? @$reservation->dropOffOffice->name : @$reservation->pickUpOffice->name  }} <br>
                                     </td>

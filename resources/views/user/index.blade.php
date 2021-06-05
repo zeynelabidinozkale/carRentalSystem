@@ -42,7 +42,7 @@
                     <td>{{ $user->created_at }}</td>
                     <td>
                         <a class="btn btn-primary btn-sm mr-1" href="{{route('user.edit',$user->id)}}">Edit</a>
-                        <a class="btn btn-warning btn-sm mr-1" href="{{route('sendCredentials',$user->id)}}">Send Credentials</a>
+                        <a class="btn btn-warning btn-sm mr-1 confirmation" href="{{route('sendCredentials',$user->id)}}">Send Credentials</a>
                         <form autocomplete="off" class="delete d-inline" action="{{route('user.destroy',$user->id)}}" method="POST">
                             <input type="hidden" name="_method" value="DELETE"> {{csrf_field()}} <button class="btn btn-danger btn-sm mr-1 confirmation" type="submit">Delete</button>
                         </form>
