@@ -44,7 +44,7 @@
             <tbody>
                 @foreach($reservations as $reservation)
                 <tr>
-                    <td> @if($reservation->vehicle->image) <img src="{{ Storage::url($reservation->vehicle->image)}}" width="100"> <br> @endif {{ $reservation->vehicle->name }}</td>
+                    <td> @if($reservation->vehicle->image) <img src="{{ asset(Storage::url($reservation->vehicle->image))}}" width="100"> <br> @endif {{ $reservation->vehicle->name }}</td>
                     <td>{{ @$reservation->pickUpOffice->name }}</td>
                     <td>{{ @$reservation->dropOffOffice->name }}</td>
                     <td>{{ $reservation->created_at }}</td>

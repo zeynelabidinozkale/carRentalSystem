@@ -19,7 +19,7 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="first-slide" src="/img/1.jpg" alt="First slide">
+            <img class="first-slide" src="{{asset('/img/1.jpg')}}" alt="First slide">
             <div class="container">
               <div class="carousel-caption text-left">
                 <h1>Renting a Car Is Now Easy</h1>
@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img class="second-slide" src="/img/5.jpg" alt="Second slide">
+            <img class="second-slide" src="{{asset('/img/5.jpg')}}" alt="Second slide">
             <div class="container">
               <div class="carousel-caption text-right">
                 <h1>Track Your Reservation</h1>
@@ -39,7 +39,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img class="third-slide" src="/img/6.jpg" alt="Third slide">
+            <img class="third-slide" src="{{asset('/img/6.jpg')}}" alt="Third slide">
             <div class="container">
               <div class="carousel-caption text-right">
                     @guest
@@ -129,7 +129,7 @@
                         <div class="col-md-4">
                             <div class="carousel-caption">
                                 <div class="card mb-4 box-shadow">
-                                    <img class="card-img-right flex-auto" src="@if($vehicle->image) {{ Storage::url($vehicle->image) }} @else /img/noImage/noImage.png @endif" width="100%" data-holder-rendered="true">
+                                    <img class="card-img-right flex-auto" src="@if($vehicle->image) {{ asset(Storage::url($vehicle->image)) }} @else {{asset('/img/noImage/noImage.png')}} @endif" width="100%" data-holder-rendered="true">
                                     <div class="card-body">
                                         <table class="table table-font-color mt-2 mb-0">
                                             <thead>

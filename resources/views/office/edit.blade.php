@@ -40,7 +40,7 @@
                   <div class="row">
                     @foreach ($vehicles as $vehicle)
                     <div class="col-md-2 mb-3">
-                        @if($vehicle->image) <img src="{{ Storage::url($vehicle->image) }}" height="100"> @else <img src="/img/noImage/noImage.png" height="100" > @endif
+                        @if($vehicle->image) <img src="{{ asset(Storage::url($vehicle->image)) }}" height="100"> @else <img src="{{asset('/img/noImage/noImage.png')}}" height="100" > @endif
                     </div>
                     <div class="col-md-3 mb-3">
                       <label for="firstName">Vehicle Name</label>

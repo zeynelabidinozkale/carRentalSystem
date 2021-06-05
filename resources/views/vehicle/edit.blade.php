@@ -13,7 +13,7 @@
 
                     @if($vehicle->image)
                     <div class="col-md-12 mb-3">
-                        <img src="{{ Storage::url($vehicle->image) }}" width="240">
+                        <img src="{{ asset(Storage::url($vehicle->image)) }}" width="240">
                     </div>
                     @endif
                     <div class="col-md-6 mb-3">

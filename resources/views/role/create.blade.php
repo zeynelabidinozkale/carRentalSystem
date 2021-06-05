@@ -14,7 +14,7 @@
                     </div>
                     <div class="col-md-6"></div>
                     <div class="col-md-6 mb-3">
-                        <input type="checkbox" name="panelLogin" value="1" id="panelLogin" required>
+                        <input type="checkbox" name="panelLogin" value="1" id="panelLogin" >
                         <label for="panelLogin">Has Permission To Control Panel</label>
                     </div>
                   </div>

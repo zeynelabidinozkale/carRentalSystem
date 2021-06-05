@@ -3,7 +3,7 @@
     <footer class="container">
         <div class="row pt-5 pb-5">
         <div class="col-12 col-md ">
-            <img class="mb-2" src="/assets/brand/logo.svg" alt="" width="100" height="100">
+            <img class="mb-2" src="{{asset('/assets/brand/logo.svg')}}" alt="" width="100" height="100">
             <small class="d-block mb-3 text-muted">© {{date('Y')}} {{env('APP_NAME')}}</small>
         </div>
         <div class="col-6 col-md">

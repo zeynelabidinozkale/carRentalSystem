@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center mt-5">
-                    <img src="/assets/brand/logo.svg" class="translate-logo mb-2" height="100">
+                    <img src="{{asset('/assets/brand/logo.svg')}}" class="translate-logo mb-2" height="100">
                     <h3>{{ env('APP_NAME') }} - Our Offices</h3>
                 </div>
             </div>
@@ -92,7 +92,7 @@ var places = [
 
     @foreach ($locations as $office)
         @if(is_numeric($office->latitude) && $office->longitude)
-        [{{$office->latitude}},{{$office->longitude}},'/assets/brand/mapIcon.png'],
+        [{{$office->latitude}},{{$office->longitude}},"{{asset('/assets/brand/mapIcon.png')}}"],
         @endif
     @endforeach
 

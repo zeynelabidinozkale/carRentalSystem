@@ -21,7 +21,7 @@
                   @foreach ($vehicles as $vehicle)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td> @if($vehicle->image) <img src="{{ Storage::url($vehicle->image) }}" width="100"> @else <img src="/img/noImage/noImage.png" width="100" > @endif</td>
+                    <td> @if($vehicle->image) <img src="{{ asset(Storage::url($vehicle->image)) }}" width="100"> @else <img src="{{ asset('/img/noImage/noImage.png') }}" width="100" > @endif</td>
                     <td>{{ $vehicle->name }}</td>
                     <td>{{ $vehicle->created_at }}</td>
                     <td>{{ $vehicle->updated_at }}</td>

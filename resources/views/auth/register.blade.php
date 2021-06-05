@@ -7,7 +7,7 @@
         <form autocomplete="off" method="POST" action="{{ route('register') }}">
             <div class="form-group mb-0">
                 <div class="col-md-12 text-center">
-                     <img class="mb-4" src="/assets/brand/logo.svg" alt="" width="72" height="57">
+                     <img class="mb-4" src="{{asset('/assets/brand/logo.svg')}}" alt="" width="72" height="57">
                      <h1 class="h3 mb-0 fw-normal">Register</h1>
                 </div>
             </div>

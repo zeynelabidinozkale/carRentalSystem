@@ -2,7 +2,7 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="{{ route('dashboard') }}"> <img src="/assets/brand/logo.svg" class="translate-logo" height="32"> {{ config('app.name', 'Laravel') }} </a>
+    <a class="navbar-brand" href="{{ route('dashboard') }}"> <img src="{{asset('/assets/brand/logo.svg')}}" class="translate-logo" height="32"> {{ config('app.name', 'Laravel') }} </a>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav mr-auto mt-2 ml-5 mt-lg-0 menu-md ">

@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center mt-5">
-                    <img src="/assets/brand/logo.svg" class="translate-logo mb-2" height="100">
+                    <img src="{{asset('/assets/brand/logo.svg')}}" class="translate-logo mb-2" height="100">
                     <h3>{{ env('APP_NAME') }} - Our Vehicles</h3>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                             @foreach ($vehicles as $vehicle)
                             <tr>
                               <td>{{ $loop->iteration }}</td>
-                              <td>@if($vehicle->image) <img src="{{ Storage::url($vehicle->image)}}" width="100"> <br> @else <img src="/img/noImage/noImage.png" width="100" > <br> @endif {{ $vehicle->name }}</td>
+                              <td>@if($vehicle->image) <img src="{{ asset(Storage::url($vehicle->image))}}" width="100"> <br> @else <img src="{{asset('/img/noImage/noImage.png')}}" width="100" > <br> @endif {{ $vehicle->name }}</td>
                               <td>{{ $vehicle->seats }} seats, {{ $vehicle->bags }} bags, {{ $vehicle->doors }} doors   </td>
                               <td><b>fuel type:</b> {{ @$vehicle->fueltype->name }}, <b>gear type:</b> {{ @$vehicle->geartype->name }}, <b>Vehicle Class:</b> {{ @$vehicle->vclass->name }} </td>
                             </tr>

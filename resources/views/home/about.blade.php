@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center mt-5">
-                    <img src="/assets/brand/logo.svg" class="translate-logo mb-2" height="100">
+                    <img src="{{asset('/assets/brand/logo.svg')}}" class="translate-logo mb-2" height="100">
                     <h3>{{ env('APP_NAME') }} - About</h3>
                 </div>
             </div>
