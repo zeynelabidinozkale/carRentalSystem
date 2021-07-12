@@ -40,10 +40,6 @@ Route::middleware(['auth','accountGuard'])->group(function () {
     Route::any('/account/passwordChange', [AccountController::class,'passwordChange'])->name('account.passwordChange');
 });
 
-
-//Route::get('/', function () { return view('welcome'); });
-
-
 Route::middleware(['auth','panelGuard'])->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');
     Route::any('/dashboard/logs', [AdminController::class,'logs'])->name('logs');

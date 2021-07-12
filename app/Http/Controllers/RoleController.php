@@ -43,7 +43,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $request["panelLogin"] = $request->panelLogin ? (bool)$request->panelLogin : 0;
+        $request["panelLogin"] = $request->panelLogin ? $request->panelLogin : 0;
         $request['name'] = Str::slug($request->name);
         Role::create($request->except('_method'));
         return redirect(route('role.index',['page'=>\Session::get('page_number')]))->with("success","Your transaction has been completed successfully");

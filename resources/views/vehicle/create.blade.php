@@ -5,8 +5,7 @@
         <hr class="mb-4">
         <div class="row">
             <div class="col-md-8">
-                <form autocomplete="off" class="needs-validation" method="POST" action="{{ route('vehicle.store') }}" enctype="multipart/form-data"   >
-                  @csrf
+                <form autocomplete="off" method="POST" action="{{ route('vehicle.store') }}" enctype="multipart/form-data">
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="firstName">Name</label>
@@ -28,6 +27,7 @@
                         <label for="firstName">Doors</label>
                         <input type="number" class="form-control" name="doors" required>
                     </div>
+                    @csrf
                     <div class="col-md-4 mb-3">
                         <label for="firstName">Vehicle Class</label>
                         <select class="form-control" name="vclass_id" required>

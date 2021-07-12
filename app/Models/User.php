@@ -40,15 +40,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+
     public function role(){
         return $this->belongsTo(Role::class);
     }
+
     public function offices(){
         return $this->belongsToMany(Office::class,'office_personnel','personnel_id');
     }
+
     public function hasRole($role_name){
         return $this->role()->first()->name == $role_name ? true : false;
     }
+
     public function reservations(){
         return $this->hasMany(Reservation::class,'client_id');
     }

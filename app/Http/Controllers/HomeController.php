@@ -58,7 +58,6 @@ class HomeController extends Controller
     }
     public function reservation(Request $request)
     {
-        /* return dd(in_array('5',$request->vclass)); */
         $pick_up_office = Office::find($request->pick_up_office_id);
         $offices = Office::all();
         if(!$request->step){
@@ -236,6 +235,7 @@ class HomeController extends Controller
     public function track(){
         return view('home.reservationTrack');
     }
+
     public function trackResult(Request $request){
         $reservation = Reservation::where('trackNumber',$request->trackNumber)->first();
         if(!$reservation){

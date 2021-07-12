@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Office;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -134,9 +135,18 @@ class ReservationController extends Controller
                 break;
                 case 'costumerReceivedTheVehicle':
                     $request['pick_up_datetime'] = Carbon::now();
+                    $office = Office::find($reservation->pick_up_office_id);
+                    $vehicle = $office->vehicles()->find($reservation->vehicle_id);
+                    $vehicle->pivot->qty -=1;
+                    $vehicle->pivot->save();
                 break;
                 case 'costumerDeliveredTheVehicle':
                     $request['drop_off_datetime'] = Carbon::now();
+                    $drop_off_office_id = $reservation->drop_off_office_id ? $reservation->drop_off_office_id : $reservation->pick_up_office_id;
+                    $office = Office::find($drop_off_office_id);
+                    $vehicle = $office->vehicles()->find($reservation->vehicle_id);
+                    $vehicle->pivot->qty +=1;
+                    $vehicle->pivot->save();
                 break;
                 default:
                 return back()->with("warning","Not Sent correctly");

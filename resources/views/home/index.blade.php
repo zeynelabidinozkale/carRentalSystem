@@ -128,8 +128,8 @@
                         @foreach($_vehicles as $vehicle)
                         <div class="col-md-4">
                             <div class="carousel-caption">
-                                <div class="card mb-4 box-shadow">
-                                    <img class="card-img-right flex-auto" src="@if($vehicle->image) {{ asset(Storage::url($vehicle->image)) }} @else {{asset('/img/noImage/noImage.png')}} @endif" width="100%" data-holder-rendered="true">
+                                <div class="card mb-4 box-shadow" style="max-height:460px;">
+                                    <img class="card-img-right flex-auto" style="height:240px;" src="@if($vehicle->image) {{ asset(Storage::url($vehicle->image)) }} @else {{asset('/img/noImage/noImage.png')}} @endif" width="100%" data-holder-rendered="true">
                                     <div class="card-body">
                                         <table class="table table-font-color mt-2 mb-0">
                                             <thead>
@@ -182,7 +182,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12 text-center mb-5">
-                <a href="{{ route('vehicles') }}" class="btn btn-success ">See All <span data-feather="chevron-right"></span></a>
+                <a href="{{ route('vehicles') }}" style="transform: translateY(-80px);" class="btn btn-success ">See All <span data-feather="chevron-right"></span></a>
                 </div>
             </div>
         </div>

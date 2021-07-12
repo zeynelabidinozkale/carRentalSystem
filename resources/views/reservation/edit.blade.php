@@ -11,7 +11,7 @@
                 @endif
                 @if(!$reservation->canceled_at)
                 <button type="submit" @if(!$reservation->pick_up_datetime) name="event" value="costumerReceivedTheVehicle" @endif class="btn btn-primary align-self-center mr-2 mb-1 confirmation" @if($reservation->pick_up_datetime) disabled @endif> @if($reservation->pick_up_datetime) customer received at {{ $reservation->pick_up_datetime }} @else customer received the vehicle @endif </button>
-                <button type="submit" @if(!$reservation->drop_off_datetime) name="event" value="costumerDeliveredTheVehicle" @endif class="btn btn-success align-self-center mb-1 confirmation" @if($reservation->drop_off_datetime) disabled @endif> @if($reservation->drop_off_datetime) customer delivered at {{ $reservation->drop_off_datetime }} @else customer delivered the vehicle @endif </button>
+                @if($reservation->pick_up_datetime)<button type="submit" @if(!$reservation->drop_off_datetime) name="event" value="costumerDeliveredTheVehicle" @endif class="btn btn-success align-self-center mb-1 confirmation" @if($reservation->drop_off_datetime) disabled @endif> @if($reservation->drop_off_datetime) customer delivered at {{ $reservation->drop_off_datetime }} @else customer delivered the vehicle @endif </button>@endif
                 @endif
             </form>
         </div>
