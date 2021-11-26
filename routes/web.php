@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Spatie\Honeypot\ProtectAgainstSpam;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccountController;
@@ -19,7 +20,7 @@ use App\Http\Controllers\CheckoutController;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware(ProtectAgainstSpam::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
 Route::get('/home/offices', [App\Http\Controllers\HomeController::class, 'offices'])->name('offices');

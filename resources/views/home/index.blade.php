@@ -71,6 +71,7 @@
             <div class="card-body">
                 <form autocomplete="off" class="row" action="{{ route('home.reservation') }}">
                     <input type="hidden" name="step" value="vehicle">
+                    @honeypot
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="pick_up_office_id">Select pickup location</label>

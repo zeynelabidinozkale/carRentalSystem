@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Spatie\Honeypot\HoneypotServiceProvider::class,
         /*
          * Application Service Providers...
          */
